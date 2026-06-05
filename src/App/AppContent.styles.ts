@@ -1,14 +1,16 @@
 const styles = {
-  container: 'mx-auto max-w-6xl',
+  container: 'mx-auto max-w-5xl',
 
   header:
-    'mb-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between',
+    'mb-12 flex flex-col gap-6 border-b border-slate-200 pb-8 sm:flex-row sm:items-end sm:justify-between',
 
-  eyebrow: 'text-sm font-medium tracking-wide text-blue-600/80 uppercase',
+  eyebrow:
+    'text-xs font-semibold tracking-widest text-slate-500 uppercase',
 
-  title: 'mt-2 text-4xl font-bold tracking-tight text-slate-900',
+  title:
+    'mt-3 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl',
 
-  description: 'mt-2 max-w-2xl text-sm leading-6 text-slate-500',
+  description: 'mt-3 max-w-2xl text-base leading-7 text-slate-600',
 };
 
 export default styles;

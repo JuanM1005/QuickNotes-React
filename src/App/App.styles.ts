@@ -1,5 +1,5 @@
 const styles = {
-  main: 'min-h-screen bg-linear-to-br from-slate-50 to-slate-100 px-4 py-10 sm:px-6 lg:px-8',
+  main: 'min-h-svh bg-slate-50 px-4 py-12 sm:px-6 sm:py-16 lg:px-8',
 };
 
 export default styles;
