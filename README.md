@@ -1,5 +1,3 @@
-Te dejo un `README.md` listo para copiar y pegar en tu proyecto **QuickNotes**.
-
 # QuickNotes
 
 QuickNotes es una aplicación sencilla de notas construida con React, TypeScript, Vite y Tailwind CSS. El objetivo del proyecto es practicar conceptos fundamentales de React mientras se construye una interfaz limpia, modular y escalable.
