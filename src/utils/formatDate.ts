@@ -1,4 +1,4 @@
-const REGION: string = 'es-MX' as const;
+const REGION = 'es-MX' as const;
 
 const DATE_FORMAT_OPTIONS: Intl.DateTimeFormatOptions = {
   day: '2-digit',
