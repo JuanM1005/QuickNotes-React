@@ -1,5 +1,6 @@
 import { NoteCard } from '@/components/ui/NoteCard';
 import type { Note } from '@/types/note.types';
+import styles from './NoteList.styles';
 
 interface NoteListProps {
   notes: Note[];
@@ -7,7 +8,7 @@ interface NoteListProps {
 
 export const NoteList = ({ notes }: NoteListProps) => {
   return (
-    <section className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <section className={styles.cardGrid}>
       {notes.map((note) => (
         <NoteCard key={note.id} note={note} />
       ))}

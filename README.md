@@ -10,25 +10,25 @@ La aplicación muestra una lista de notas mockeadas en tarjetas visuales. Cada n
 
 Este proyecto forma parte de una práctica progresiva para reforzar conceptos como:
 
-* Componentes reutilizables
-* Props tipadas con TypeScript
-* Interfaces y tipos personalizados
-* Renderizado de listas con `.map()`
-* Uso correcto de `key` en React
-* Organización modular de archivos
-* Estilos con Tailwind CSS
-* Uso de utilidades como `formatDate`
-* Preparación futura para manejo de estado y `localStorage`
+- Componentes reutilizables
+- Props tipadas con TypeScript
+- Interfaces y tipos personalizados
+- Renderizado de listas con `.map()`
+- Uso correcto de `key` en React
+- Organización modular de archivos
+- Estilos con Tailwind CSS
+- Uso de utilidades como `formatDate`
+- Preparación futura para manejo de estado y `localStorage`
 
 ## Tecnologías utilizadas
 
-* React
-* TypeScript
-* Vite
-* Tailwind CSS
-* React Icons
-* clsx
-* Bun
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Icons
+- clsx
+- Bun
 
 ## Instalación
 
@@ -137,10 +137,10 @@ export interface Note {
 
 Renderiza una tarjeta individual de nota. Muestra:
 
-* Título
-* Contenido
-* Fecha de creación formateada
-* Color visual según el valor de `note.color`
+- Título
+- Contenido
+- Fecha de creación formateada
+- Color visual según el valor de `note.color`
 
 ### `NoteList`
 
@@ -148,9 +148,9 @@ Renderiza una lista responsive de notas usando CSS Grid.
 
 Distribución:
 
-* 1 columna en mobile
-* 2 columnas en tablet
-* 3 columnas en desktop
+- 1 columna en mobile
+- 2 columnas en tablet
+- 3 columnas en desktop
 
 ### `Button`
 
@@ -195,7 +195,7 @@ Esto evita usar cualquier string inválido como color.
 Los IDs son `string` porque más adelante se podrán generar con:
 
 ```ts
-crypto.randomUUID()
+crypto.randomUUID();
 ```
 
 Esto evita problemas de IDs repetidos al agregar o eliminar notas.
@@ -208,24 +208,24 @@ Las fechas se guardan como `string` en formato ISO porque más adelante el proye
 
 Actualmente la aplicación:
 
-* Renderiza notas mockeadas.
-* Muestra tarjetas estilizadas.
-* Usa componentes separados y reutilizables.
-* Formatea fechas.
-* Aplica colores personalizados a las notas.
-* Tiene un layout responsive y centrado.
+- Renderiza notas mockeadas.
+- Muestra tarjetas estilizadas.
+- Usa componentes separados y reutilizables.
+- Formatea fechas.
+- Aplica colores personalizados a las notas.
+- Tiene un layout responsive y centrado.
 
 ## Próximas mejoras
 
-* Agregar formulario para crear notas.
-* Manejar estado con `useState`.
-* Guardar notas en `localStorage`.
-* Editar notas existentes.
-* Eliminar notas.
-* Filtrar o buscar notas.
-* Agregar validaciones de formulario.
-* Mejorar accesibilidad.
-* Agregar modo oscuro.
+- Agregar formulario para crear notas.
+- Manejar estado con `useState`.
+- Guardar notas en `localStorage`.
+- Editar notas existentes.
+- Eliminar notas.
+- Filtrar o buscar notas.
+- Agregar validaciones de formulario.
+- Mejorar accesibilidad.
+- Agregar modo oscuro.
 
 ## Autor
 
