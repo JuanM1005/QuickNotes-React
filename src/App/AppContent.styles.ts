@@ -4,8 +4,7 @@ const styles = {
   header:
     'mb-12 flex flex-col gap-6 border-b border-slate-200 pb-8 sm:flex-row sm:items-end sm:justify-between',
 
-  eyebrow:
-    'text-xs font-semibold tracking-widest text-slate-500 uppercase',
+  eyebrow: 'text-xs font-semibold tracking-widest text-slate-500 uppercase',
 
   title:
     'mt-3 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl',

@@ -8,3 +8,6 @@ export interface Note {
   updatedAt: string;
   color?: NoteColor;
 }
+
+// Se utiliza la utility Omit para quitar los 3 campos que se rellenaran automaticamnete, el usuario solo rellenara los campos de: titulo de la nota, el contenido y el color
+export type NoteInput = Omit<Note, 'id' | 'createdAt' | 'updatedAt'>;

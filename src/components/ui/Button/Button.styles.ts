@@ -4,8 +4,7 @@ const styles = {
   buttonVariants: {
     primary:
       'border-slate-900 bg-slate-900 text-white hover:border-slate-800 hover:bg-slate-800 active:bg-slate-950',
-    secondary:
-      'border-slate-200 bg-white text-slate-900 hover:bg-slate-100',
+    secondary: 'border-slate-200 bg-white text-slate-900 hover:bg-slate-100',
     unstyled: '',
   },
   buttonSizes: {
