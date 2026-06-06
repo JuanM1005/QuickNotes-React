@@ -10,19 +10,44 @@ interface NotesProviderProps {
 
 export const NotesProvider = ({ children }: NotesProviderProps) => {
   const [notes, setNotes] = useState<Note[]>(NOTES);
-  // const [noteToDelete, setNoteToDelete] = useState<Note | null>(null);
+  // Se guarda el objeto completo (no solo el id) porque el ConfirmDialog
+  // necesita el título de la nota para mostrarlo en el mensaje de confirmación.
+  const [noteToDelete, setNoteToDelete] = useState<Note | null>(null);
 
   const handleAddNote = (input: NoteInput): void => {
     const newNote = createNote(input);
-    setNotes((prevNotes) => [newNote, ...prevNotes]);
+    setNotes((prev) => [newNote, ...prev]);
   };
 
-  const handleDeleteNote = (id: string): void => {
-    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
-  };  
+  // Borrado en 2 pasos: primero se registra la nota a eliminar (abre el diálogo),
+  // luego el usuario confirma o cancela.
+  const requestDeleteNote = (id: string): void => {
+    const note = notes.find((n) => n.id === id); // Busca la nota por su id y la guarda en noteToDelete 
+    if (note) setNoteToDelete(note);
+  };
+
+  const confirmDeleteNote = (): void => {
+    if (!noteToDelete) return; // Si no hay nota a eliminar no se ejecuta la función
+    setNotes((prev) => prev.filter((n) => n.id !== noteToDelete.id)); // Se elimina del estado
+    setNoteToDelete(null); // Después se limpia noteToDelete para cerrar el diálogo.
+  };
+
+  // Solo limpia noteToDelete para cerrar el diálogo sin modificar
+  const cancelDeleteNote = (): void => {
+    setNoteToDelete(null);
+  };
 
   return (
-    <NotesContext.Provider value={{ notes, handleAddNote, handleDeleteNote }}>
+    <NotesContext.Provider
+      value={{
+        notes,
+        noteToDelete,
+        handleAddNote,
+        requestDeleteNote,
+        confirmDeleteNote,
+        cancelDeleteNote,
+      }}
+    >
       {children}
     </NotesContext.Provider>
   );

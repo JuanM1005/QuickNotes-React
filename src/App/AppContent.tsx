@@ -7,9 +7,11 @@ import { useNotes } from '@/context/notes';
 import type { NoteInput } from '@/types/note.types';
 import { FaPlus } from 'react-icons/fa';
 import styles from './AppContent.styles';
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 
 export const AppContent = () => {
-  const { handleAddNote } = useNotes();
+  const { noteToDelete, confirmDeleteNote, cancelDeleteNote, handleAddNote } =
+    useNotes();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleOpenForm = (): void => setIsModalOpen(true);
@@ -48,6 +50,15 @@ export const AppContent = () => {
       >
         <NoteForm onSubmit={handleFormSubmit} onCancel={handleCloseForm} />
       </Modal>
+
+      <ConfirmDialog
+        isOpen={noteToDelete !== null}
+        title={`¿Eliminar "${noteToDelete?.title ?? ''}"?`}
+        description="Esta acción no se puede deshacer."
+        variant="danger"
+        onConfirm={confirmDeleteNote}
+        onCancel={cancelDeleteNote}
+      />
     </div>
   );
 };

@@ -5,15 +5,15 @@ import { formatDate } from '@/utils/formatDate';
 import { useNotes } from '@/context/notes';
 import type { NoteCardProps } from './NoteCard.types';
 import styles, { noteColorStyles } from './NoteCard.styles';
-import { Button } from '../../ui/Button/Button';
+import { Button } from '@/components/ui/Button';
 
 export const NoteCard = ({ note }: NoteCardProps) => {
-  const { handleDeleteNote } = useNotes();
+  const { requestDeleteNote } = useNotes();
   const colorClassname = note.color
     ? noteColorStyles[note.color]
     : styles.defaultColor;
 
-  const handleDeleteClick = (): void => handleDeleteNote(note.id);
+  const handleDeleteClick = (): void => requestDeleteNote(note.id);
 
   return (
     <article className={clsx(styles.card, colorClassname)}>

@@ -8,6 +8,9 @@ import type { Note, NoteInput } from '@/types/note.types';
  */
 export interface NotesContextValue {
   notes: Note[];
+  noteToDelete: Note | null;
   handleAddNote: (input: NoteInput) => void;
-  handleDeleteNote: (id: string) => void;
+  requestDeleteNote: (id: string) => void;
+  confirmDeleteNote: () => void;
+  cancelDeleteNote: () => void;
 }
