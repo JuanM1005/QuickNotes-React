@@ -10,7 +10,7 @@ interface NotesProviderProps {
 
 export const NotesProvider = ({ children }: NotesProviderProps) => {
   const [notes, setNotes] = useState<Note[]>(NOTES);
-  const [noteToDelete, setNoteToDelete] = useState<Note | null>(null);
+  // const [noteToDelete, setNoteToDelete] = useState<Note | null>(null);
 
   const handleAddNote = (input: NoteInput): void => {
     const newNote = createNote(input);
@@ -19,7 +19,7 @@ export const NotesProvider = ({ children }: NotesProviderProps) => {
 
   const handleDeleteNote = (id: string): void => {
     setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
-  };
+  };  
 
   return (
     <NotesContext.Provider value={{ notes, handleAddNote, handleDeleteNote }}>

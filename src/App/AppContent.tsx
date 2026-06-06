@@ -7,7 +7,6 @@ import { useNotes } from '@/context/notes';
 import type { NoteInput } from '@/types/note.types';
 import { FaPlus } from 'react-icons/fa';
 import styles from './AppContent.styles';
-import { ConfirmDialog } from '../components/ui/ConfirmDialog/ConfirmDialog';
 
 export const AppContent = () => {
   const { handleAddNote } = useNotes();
@@ -49,14 +48,6 @@ export const AppContent = () => {
       >
         <NoteForm onSubmit={handleFormSubmit} onCancel={handleCloseForm} />
       </Modal>
-
-      <ConfirmDialog
-        title="hola"
-        description="prueba"
-        variant="danger"
-        isOpen={isModalOpen}
-        onCancel={handleCloseForm}
-      />
     </div>
   );
 };
