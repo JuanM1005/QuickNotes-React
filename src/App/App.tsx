@@ -1,11 +1,14 @@
 import { AppContent } from './AppContent';
+import { NotesProvider } from '@/context/notes';
 import styles from './App.styles';
 
 const App = () => {
   return (
-    <main className={styles.main}>
-      <AppContent />
-    </main>
+    <NotesProvider>
+      <main className={styles.main}>
+        <AppContent />
+      </main>
+    </NotesProvider>
   );
 };
 

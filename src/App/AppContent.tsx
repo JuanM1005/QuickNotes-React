@@ -1,20 +1,25 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
 import { NoteList } from '@/components/notes/NoteList';
+import { NoteForm } from '@/components/notes/NoteForm';
+import { useNotes } from '@/context/notes';
+import type { NoteInput } from '@/types/note.types';
 import { FaPlus } from 'react-icons/fa';
 import styles from './AppContent.styles';
-import { NoteForm } from '@/components/notes/NoteForm';
-import { useAppContent } from './hooks/useAppContent';
+import { ConfirmDialog } from '../components/ui/ConfirmDialog/ConfirmDialog';
 
 export const AppContent = () => {
-  const {
-    isModalOpen,
-    notes,
-    handleAddNote,
-    handleDeleteNote,
-    handleOpenForm,
-    handleCloseForm,
-  } = useAppContent();
+  const { handleAddNote } = useNotes();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const handleOpenForm = (): void => setIsModalOpen(true);
+  const handleCloseForm = (): void => setIsModalOpen(false);
+
+  const handleFormSubmit = (input: NoteInput): void => {
+    handleAddNote(input);
+    handleCloseForm();
+  };
 
   return (
     <div className={styles.container}>
@@ -35,15 +40,23 @@ export const AppContent = () => {
         </Button>
       </header>
 
-      <NoteList notes={notes} onDelete={handleDeleteNote} />
+      <NoteList />
 
       <Modal
         isOpen={isModalOpen}
         onClose={handleCloseForm}
         title="Agregar nueva nota"
       >
-        <NoteForm onSubmit={handleAddNote} onCancel={handleCloseForm} />
+        <NoteForm onSubmit={handleFormSubmit} onCancel={handleCloseForm} />
       </Modal>
+
+      <ConfirmDialog
+        title="hola"
+        description="prueba"
+        variant="danger"
+        isOpen={isModalOpen}
+        onCancel={handleCloseForm}
+      />
     </div>
   );
 };
