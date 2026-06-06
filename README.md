@@ -1,22 +1,23 @@
 # QuickNotes
 
-QuickNotes es una aplicación sencilla de notas construida con React, TypeScript, Vite y Tailwind CSS. El objetivo del proyecto es practicar conceptos fundamentales de React mientras se construye una interfaz limpia, modular y escalable.
+QuickNotes es una aplicación de notas construida con React, TypeScript, Vite y Tailwind CSS. El objetivo del proyecto es practicar conceptos fundamentales de React mientras se construye una interfaz limpia, modular y escalable.
 
 ## Descripción
 
-La aplicación muestra una lista de notas mockeadas en tarjetas visuales. Cada nota contiene un título, contenido, fecha de creación y un color opcional para personalizar su apariencia.
+La aplicación permite crear notas con título, contenido y un color opcional. Cada nota se muestra en una tarjeta visual con fecha de creación formateada. Las notas se agregan desde un modal con formulario validado.
 
 Este proyecto forma parte de una práctica progresiva para reforzar conceptos como:
 
 - Componentes reutilizables
 - Props tipadas con TypeScript
 - Interfaces y tipos personalizados
+- Hooks personalizados para separar lógica de UI
+- Manejo de estado con `useState`
+- Formularios controlados con validación
+- Modales accesibles (Escape, focus trap, scroll lock)
 - Renderizado de listas con `.map()`
-- Uso correcto de `key` en React
 - Organización modular de archivos
 - Estilos con Tailwind CSS
-- Uso de utilidades como `formatDate`
-- Preparación futura para manejo de estado y `localStorage`
 
 ## Tecnologías utilizadas
 
@@ -86,18 +87,37 @@ Revisa si los archivos están correctamente formateados sin modificarlos.
 
 ```txt
 src/
+├─ App/
+│  ├─ hooks/
+│  │  └─ useAppContent.ts
+│  ├─ App.tsx
+│  ├─ App.styles.ts
+│  ├─ AppContent.tsx
+│  └─ AppContent.styles.ts
 ├─ components/
+│  ├─ notes/
+│  │  ├─ NoteCard/
+│  │  ├─ NoteForm/
+│  │  │  └─ hooks/
+│  │  │     └─ useNoteForm.ts
+│  │  └─ NoteList/
 │  └─ ui/
 │     ├─ Button/
-│     ├─ NoteCard/
-│     └─ NoteList/
+│     ├─ FormField/
+│     ├─ Input/
+│     ├─ Modal/
+│     │  └─ hooks/
+│     │     ├─ useEscapeKey.ts
+│     │     ├─ useFocusTrap.ts
+│     │     └─ useLockScroll.ts
+│     └─ Textarea/
 ├─ data/
 │  └─ notes.data.ts
 ├─ types/
 │  └─ note.types.ts
 ├─ utils/
+│  ├─ createNote.ts
 │  └─ formatDate.ts
-├─ App.tsx
 └─ main.tsx
 ```
 
@@ -122,7 +142,7 @@ export interface Note {
 
 | Campo       | Tipo        | Descripción                                  |
 | ----------- | ----------- | -------------------------------------------- |
-| `id`        | `string`    | Identificador único de la nota.              |
+| `id`        | `string`    | Identificador único generado con `crypto.randomUUID()`. |
 | `title`     | `string`    | Título breve de la nota.                     |
 | `content`   | `string`    | Contenido principal de la nota.              |
 | `createdAt` | `string`    | Fecha de creación en formato ISO.            |
@@ -138,7 +158,7 @@ Renderiza una tarjeta individual de nota. Muestra:
 - Título
 - Contenido
 - Fecha de creación formateada
-- Color visual según el valor de `note.color`
+- Color visual con borde izquierdo y hover que refleja el color de la nota
 
 ### `NoteList`
 
@@ -150,79 +170,114 @@ Distribución:
 - 2 columnas en tablet
 - 3 columnas en desktop
 
+### `NoteForm`
+
+Formulario controlado para crear notas. Incluye:
+
+- Campo de título
+- Campo de contenido (máx. 500 caracteres)
+- Selector de color con indicador visual de selección
+- Validación: el botón de guardar se desactiva si algún campo está vacío
+- Reset automático al guardar o cancelar
+
+### `Modal`
+
+Modal accesible con:
+
+- Cierre con tecla Escape (`useEscapeKey`)
+- Bloqueo de scroll del body (`useLockScroll`)
+- Trampa de foco para que el Tab no salga del modal (`useFocusTrap`)
+- Cierre al hacer clic en el overlay
+- Renderizado con `createPortal` para evitar problemas de z-index
+
+### `FormField`
+
+Envuelve un input o textarea con label, indicador de campo requerido, texto de ayuda y mensaje de error. El label cambia de color al activarse el campo gracias a `group-focus-within` de Tailwind.
+
 ### `Button`
 
-Componente reutilizable para acciones de la interfaz, como agregar una nueva nota.
+Componente reutilizable con variantes (`primary`, `secondary`, `unstyled`), tamaños (`sm`, `md`, `lg`) y opción de ancho completo.
+
+## Hooks personalizados
+
+### `useAppContent`
+
+Gestiona el estado global de la aplicación: lista de notas y visibilidad del modal.
+
+### `useNoteForm`
+
+Gestiona el estado del formulario: valores de los campos, validación y reset.
+
+### `useEscapeKey`
+
+Escucha el evento `keydown` y ejecuta un callback al presionar Escape. Limpia el listener al desmontar.
+
+### `useFocusTrap`
+
+Aplica `inert` al elemento `#root` mientras el modal está abierto, forzando que el foco quede dentro del modal (que se renderiza fuera de root vía portal).
+
+### `useLockScroll`
+
+Aplica `overflow: hidden` al body mientras el modal está abierto. Restaura el valor original al cerrar.
 
 ## Utilidades
 
+### `createNote`
+
+Factory que construye un objeto `Note` completo a partir de un `NoteInput`, generando el `id` con `crypto.randomUUID()` y los timestamps con `new Date().toISOString()`.
+
 ### `formatDate`
 
-Convierte una fecha en formato ISO a un formato más legible para el usuario.
+Convierte una fecha en formato ISO a un formato legible en español (es-MX).
 
 Ejemplo:
 
 ```ts
-formatDate('2026-06-04T10:30:00.000');
+formatDate('2026-06-04T10:30:00.000Z');
 ```
 
 Salida esperada:
 
 ```txt
-4 jun 2026, 10:30
+04 jun 2026, 10:30
 ```
 
 ## Decisiones técnicas
 
+### Separación de lógica y UI con hooks
+
+La lógica de cada componente complejo vive en su propio hook (`useNoteForm`, `useAppContent`). El componente solo se encarga del renderizado.
+
 ### Uso de `interface` para `Note`
 
-Se usa `interface` porque `Note` representa la estructura de un objeto. Esto hace que el modelo sea claro y fácil de reutilizar en componentes, datos mockeados y futuros hooks.
+Se usa `interface` porque `Note` representa la estructura de un objeto. Esto hace que el modelo sea claro y fácil de reutilizar en componentes, datos mockeados y hooks.
 
 ### Uso de `type` para `NoteColor`
 
-Se usa `type` porque `NoteColor` representa un conjunto limitado de valores permitidos.
-
-```ts
-type NoteColor = 'blue' | 'green' | 'yellow' | 'pink' | 'purple';
-```
-
-Esto evita usar cualquier string inválido como color.
-
-### IDs como `string`
-
-Los IDs son `string` porque más adelante se podrán generar con:
-
-```ts
-crypto.randomUUID();
-```
-
-Esto evita problemas de IDs repetidos al agregar o eliminar notas.
+Se usa `type` porque `NoteColor` representa un conjunto limitado de valores permitidos, evitando que se use cualquier string inválido como color.
 
 ### Fechas como `string`
 
-Las fechas se guardan como `string` en formato ISO porque más adelante el proyecto usará `localStorage`, y `localStorage` guarda datos como texto.
+Las fechas se guardan como `string` en formato ISO porque en el futuro el proyecto usará `localStorage`, que guarda datos como texto.
 
 ## Estado actual
 
 Actualmente la aplicación:
 
-- Renderiza notas mockeadas.
-- Muestra tarjetas estilizadas.
-- Usa componentes separados y reutilizables.
-- Formatea fechas.
-- Aplica colores personalizados a las notas.
-- Tiene un layout responsive y centrado.
+- Renderiza notas en un grid responsive.
+- Permite agregar nuevas notas desde un modal con formulario validado.
+- Aplica colores personalizados a las tarjetas.
+- Formatea fechas en español.
+- Usa un modal completamente accesible.
+- Separa lógica de UI en hooks personalizados.
+- Tiene componentes UI reutilizables (Button, Input, Textarea, FormField, Modal).
 
 ## Próximas mejoras
 
-- Agregar formulario para crear notas.
-- Manejar estado con `useState`.
 - Guardar notas en `localStorage`.
 - Editar notas existentes.
 - Eliminar notas.
 - Filtrar o buscar notas.
-- Agregar validaciones de formulario.
-- Mejorar accesibilidad.
 - Agregar modo oscuro.
 
 ## Autor
