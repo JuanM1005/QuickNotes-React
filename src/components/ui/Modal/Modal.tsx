@@ -10,53 +10,55 @@ import { ModalHeader } from './ModalHeader';
 import styles from './Modal.styles';
 
 export const Modal = ({
-    children,
-    isOpen,
-    onClose,
-    title,
-    closeOnOverlay = true,
-    ariaLabel,
-    className,
+  children,
+  isOpen,
+  onClose,
+  title,
+  closeOnOverlay = true,
+  ariaLabel,
+  className,
 }: ModalProps) => {
-    useEscapeKey(onClose, isOpen);
-    useLockScroll(isOpen);
-    useFocusTrap(isOpen);
+  useEscapeKey(onClose, isOpen);
+  useLockScroll(isOpen);
+  useFocusTrap(isOpen);
 
-    if (!isOpen) return null;
+  if (!isOpen) return null;
 
-    const handleOverlayClick = () => {
-        if (closeOnOverlay) {
-            onClose();
-        }
-    };
+  const handleOverlayClick = () => {
+    if (closeOnOverlay) {
+      onClose();
+    }
+  };
 
-    const handleModalClick = (event: MouseEvent<HTMLElement>) => {
-        event.stopPropagation();
-    };
+  const handleModalClick = (event: MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+  };
 
-    return createPortal(
-        <div
-            className={styles.modalOverlayStyles}
-            onClick={handleOverlayClick}
-            role="presentation"
-        >
-            <section
-                role="dialog"
-                aria-modal="true"
-                aria-label={!title ? ariaLabel : undefined}
-                aria-labelledby={title ? 'modal-title' : undefined}
-                className={clsx(styles.modalContainerStyles, className)}
-                onClick={handleModalClick}
-            >
-                {title && (
-                    <div id="modal-title">
-                        <ModalHeader title={title} onClose={onClose} />
-                    </div>
-                )}
+  // createPortal renderiza el modal fuera del árbol de componentes para evitar
+  // problemas de z-index y overflow: hidden heredados de componentes padre
+  return createPortal(
+    <div
+      className={styles.modalOverlayStyles}
+      onClick={handleOverlayClick}
+      role="presentation"
+    >
+      <section
+        role="dialog"
+        aria-modal="true"
+        aria-label={!title ? ariaLabel : undefined}
+        aria-labelledby={title ? 'modal-title' : undefined}
+        className={clsx(styles.modalContainerStyles, className)}
+        onClick={handleModalClick}
+      >
+        {title && (
+          <div id="modal-title">
+            <ModalHeader title={title} onClose={onClose} />
+          </div>
+        )}
 
-                <div className={styles.modalBodyStyles}>{children}</div>
-            </section>
-        </div>,
-        document.body,
-    );
+        <div className={styles.modalBodyStyles}>{children}</div>
+      </section>
+    </div>,
+    document.body,
+  );
 };

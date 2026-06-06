@@ -1,35 +1,14 @@
-import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
 import { NoteList } from '@/components/notes/NoteList';
 import { FaPlus } from 'react-icons/fa';
 import styles from './AppContent.styles';
-import { NOTES } from '@/data/notes.data';
-import type { Note } from '@/types/note.types';
-import { createNote } from '@/utils/createNote';
+import { NoteForm } from '@/components/notes/NoteForm';
+import { useAppContent } from './hooks/useAppContent';
 
 export const AppContent = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [notes, setNotes] = useState<Note[]>(NOTES)
-
-  const addNote = (): void => {
-    const newNote = createNote({
-      title: `Nueva nota ${notes.length + 1}`,
-      content: 'Escribe aquí el contenido de tu nota.',
-      color: 'blue',
-    });
-
-    setNotes(prevNotes => [...prevNotes, newNote])
-    setIsModalOpen(false)
-  }
-
-  const openModal = (): void => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = (): void => {
-    setIsModalOpen(false);
-  };
+  const { isModalOpen, notes, handleAddNote, handleOpenForm, handleCloseForm } =
+    useAppContent();
 
   return (
     <div className={styles.container}>
@@ -45,7 +24,7 @@ export const AppContent = () => {
           </p>
         </div>
 
-        <Button onClick={openModal}>
+        <Button onClick={handleOpenForm}>
           <FaPlus size={15} /> Agregar nueva nota
         </Button>
       </header>
@@ -54,20 +33,10 @@ export const AppContent = () => {
 
       <Modal
         isOpen={isModalOpen}
-        onClose={closeModal}
+        onClose={handleCloseForm}
         title="Agregar nueva nota"
       >
-        <p>Aquí irá el formulario para crear una nota.</p>
-
-        <div className="mt-6 flex justify-end gap-3">
-          <Button variant="secondary" onClick={closeModal}>
-            Cancelar
-          </Button>
-
-          <Button variant="primary" onClick={addNote}>
-            Guardar nota
-          </Button>
-        </div>
+        <NoteForm onSubmit={handleAddNote} onCancel={handleCloseForm} />
       </Modal>
     </div>
   );
