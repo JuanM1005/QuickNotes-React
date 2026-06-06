@@ -7,6 +7,7 @@ interface UseAppContentReturn {
   isModalOpen: boolean;
   notes: Note[];
   handleAddNote: (input: NoteInput) => void;
+  handleDeleteNote: (id: string) => void;
   handleOpenForm: () => void;
   handleCloseForm: () => void;
 }
@@ -22,6 +23,10 @@ export const useAppContent = (): UseAppContentReturn => {
     handleCloseForm();
   };
 
+  const handleDeleteNote = (id: string): void => {
+    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+  };
+
   const handleOpenForm = (): void => {
     setIsModalOpen(true);
   };
@@ -34,6 +39,7 @@ export const useAppContent = (): UseAppContentReturn => {
     isModalOpen,
     notes,
     handleAddNote,
+    handleDeleteNote,
     handleOpenForm,
     handleCloseForm,
   };

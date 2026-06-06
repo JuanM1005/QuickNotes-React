@@ -7,8 +7,14 @@ import { NoteForm } from '@/components/notes/NoteForm';
 import { useAppContent } from './hooks/useAppContent';
 
 export const AppContent = () => {
-  const { isModalOpen, notes, handleAddNote, handleOpenForm, handleCloseForm } =
-    useAppContent();
+  const {
+    isModalOpen,
+    notes,
+    handleAddNote,
+    handleDeleteNote,
+    handleOpenForm,
+    handleCloseForm,
+  } = useAppContent();
 
   return (
     <div className={styles.container}>
@@ -29,7 +35,7 @@ export const AppContent = () => {
         </Button>
       </header>
 
-      <NoteList notes={notes} />
+      <NoteList notes={notes} onDelete={handleDeleteNote} />
 
       <Modal
         isOpen={isModalOpen}

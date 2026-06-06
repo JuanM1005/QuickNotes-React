@@ -140,14 +140,14 @@ export interface Note {
 
 ### Explicación de campos
 
-| Campo       | Tipo        | Descripción                                  |
-| ----------- | ----------- | -------------------------------------------- |
+| Campo       | Tipo        | Descripción                                             |
+| ----------- | ----------- | ------------------------------------------------------- |
 | `id`        | `string`    | Identificador único generado con `crypto.randomUUID()`. |
-| `title`     | `string`    | Título breve de la nota.                     |
-| `content`   | `string`    | Contenido principal de la nota.              |
-| `createdAt` | `string`    | Fecha de creación en formato ISO.            |
-| `updatedAt` | `string`    | Fecha de última edición en formato ISO.      |
-| `color`     | `NoteColor` | Color opcional para personalizar la tarjeta. |
+| `title`     | `string`    | Título breve de la nota.                                |
+| `content`   | `string`    | Contenido principal de la nota.                         |
+| `createdAt` | `string`    | Fecha de creación en formato ISO.                       |
+| `updatedAt` | `string`    | Fecha de última edición en formato ISO.                 |
+| `color`     | `NoteColor` | Color opcional para personalizar la tarjeta.            |
 
 ## Componentes principales
 

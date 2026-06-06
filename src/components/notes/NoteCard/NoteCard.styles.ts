@@ -11,9 +11,13 @@ export const noteColorStyles: Record<NoteColor, string> = {
 const styles = {
   card: 'rounded-xl border border-slate-200 border-l-4 bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-lg',
   defaultColor: 'border-l-slate-400 hover:border-slate-300',
-  header: 'mb-3',
-  title: 'line-clamp-2 text-lg font-semibold leading-snug text-slate-900',
-  date: 'mt-2 flex items-center gap-2 text-xs text-slate-500',
+  header: 'mb-3 flex items-start justify-between gap-4',
+  title:
+    'min-w-0 line-clamp-2 text-lg font-semibold leading-snug text-slate-900',
+  deleteButton:
+    'shrink-0 text-sm font-medium text-slate-700 transition hover:text-red-600',
+  body: 'space-y-3',
+  date: 'flex items-center gap-2 text-xs text-slate-500',
   content: 'line-clamp-3 text-sm leading-relaxed text-slate-700',
 };
 
