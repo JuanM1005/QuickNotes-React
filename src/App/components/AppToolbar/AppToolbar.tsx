@@ -44,10 +44,11 @@ export const AppToolbar = ({
           <Button
             key={value}
             variant={activeFilter === value ? 'selected' : 'secondary'}
-            size="md"
+            size="sm"
+            className={styles.filterBtn}
             onClick={() => onFilterChange(value)}
           >
-            <Icon size={13} />
+            <Icon size={12} />
             {label}
           </Button>
         ))}

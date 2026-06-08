@@ -8,18 +8,27 @@ export const useNotesFilter = () => {
   const [activeFilter, setActiveFilter] = useState<NoteFilter>('all');
 
   const filteredNotes = useMemo<Note[]>(() => {
-    return notes.filter((note) => {
-      const matchesCategory =
-        activeFilter === 'all' || note.category === activeFilter;
+    return (
+      notes
+        .filter((note) => {
+          const matchesCategory =
+            activeFilter === 'all' || note.category === activeFilter;
 
-      const query = searchQuery.trim().toLowerCase();
-      const matchesSearch =
-        query === '' ||
-        note.title.toLowerCase().includes(query) ||
-        note.content.toLowerCase().includes(query);
+          const query = searchQuery.trim().toLowerCase();
+          const matchesSearch =
+            query === '' ||
+            note.title.toLowerCase().includes(query) ||
+            note.content.toLowerCase().includes(query);
 
-      return matchesCategory && matchesSearch;
-    });
+          return matchesCategory && matchesSearch;
+        })
+        // Ordena por fecha de actualización descendente: la nota más reciente aparece primero.
+        // Usa updatedAt para que las notas editadas también suban al tope.
+        .sort(
+          (a, b) =>
+            new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
+        )
+    );
   }, [notes, searchQuery, activeFilter]);
 
   return {

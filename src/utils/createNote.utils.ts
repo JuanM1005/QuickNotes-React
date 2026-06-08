@@ -9,6 +9,7 @@ export const createNote = (input: NoteInput): Note => {
     content: input.content,
     color: input.color,
     category: input.category,
+    icon: input.icon,
     createdAt: now,
     updatedAt: now,
   };

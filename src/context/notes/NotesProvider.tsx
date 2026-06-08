@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import type { Note, NoteInput } from '@/types/note.types';
-import { createNote } from '@/utils/createNote';
+import { createNote } from '@/utils/createNote.utils';
 import { NotesContext } from './NotesContext';
 import { getStoredNotes, saveNotes } from '@/storage/notes.storage';
 

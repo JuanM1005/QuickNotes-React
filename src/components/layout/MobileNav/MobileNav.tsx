@@ -5,6 +5,7 @@ import { NoteForm } from '@/components/notes/NoteForm';
 import { useNoteModal } from '@/App/hooks/useNoteModal';
 import { SIDEBAR_ITEMS } from '@/components/layout/Sidebar/data';
 import type { SidebarItemId } from '@/components/layout/Sidebar/data/Sidebar.data.types';
+import { Button } from '@/components/ui/Button';
 import styles from './MobileNav.styles';
 
 export const MobileNav = () => {
@@ -14,35 +15,56 @@ export const MobileNav = () => {
   const leftItems = SIDEBAR_ITEMS.slice(0, 2);
   const rightItems = SIDEBAR_ITEMS.slice(2);
 
+  // const handleNavClick = (id: SidebarItemId, label: string): void => {
+  //   if (id === 'notes') {
+  //     setActiveId(id);
+  //   } else {
+  //     alert(`Sección "${label}" próximamente.`);
+  //   }
+  // };
+
+  // Solo para probar el estado del botón (cambia de color)
+  const handleNavClick = (id: SidebarItemId, label: string): void => {
+    setActiveId(id);
+    alert(`Sección "${label}" próximamente.`);
+  };
+
   return (
     <>
       <nav className={styles.nav}>
-        {leftItems.map(({ id, icon: Icon }) => (
-          <button
+        {leftItems.map(({ id, icon: Icon, label }) => (
+          <Button
             key={id}
+            variant="unstyled"
             className={styles.item(activeId === id)}
-            onClick={() => setActiveId(id)}
+            onClick={() => handleNavClick(id, label)}
           >
-            <Icon size={22} />
-          </button>
+            <Icon size={20} />
+            {label}
+          </Button>
         ))}
 
-        <button
-          className={styles.addBtn}
-          onClick={open}
-          aria-label="Nueva nota"
-        >
-          <LuPlus size={24} />
-        </button>
-
-        {rightItems.map(({ id, icon: Icon }) => (
-          <button
-            key={id}
-            className={styles.item(activeId === id)}
-            onClick={() => setActiveId(id)}
+        <div className={styles.addBtnWrapper}>
+          <Button
+            variant="unstyled"
+            className={styles.addBtnContent}
+            onClick={open}
+            aria-label="Nueva nota"
           >
-            <Icon size={22} />
-          </button>
+            <LuPlus size={24} />
+          </Button>
+        </div>
+
+        {rightItems.map(({ id, icon: Icon, label }) => (
+          <Button
+            key={id}
+            variant="unstyled"
+            className={styles.item(activeId === id)}
+            onClick={() => handleNavClick(id, label)}
+          >
+            <Icon size={20} />
+            {label}
+          </Button>
         ))}
       </nav>
 

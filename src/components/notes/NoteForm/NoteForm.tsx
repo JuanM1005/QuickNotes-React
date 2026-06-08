@@ -3,6 +3,7 @@ import clsx from 'clsx';
 
 import type { NoteFormProps } from './NoteForm.types';
 import type { NoteCategory, NoteColor } from '@/types/note.types';
+import { NOTE_ICONS, NOTE_ICON_KEYS } from '@/data/noteIcons.data';
 import { Button } from '@/components/ui/Button';
 import { FormField } from '@/components/ui/FormField';
 import { Input } from '@/components/ui/Input';
@@ -31,10 +32,12 @@ export const NoteForm = ({ onSubmit, onCancel }: NoteFormProps) => {
     content,
     color,
     category,
+    icon,
     setTitle,
     setContent,
     setColor,
     setCategory,
+    setIcon,
     handleSubmit,
     handleCancel,
     isSubmitDisabled,
@@ -92,6 +95,32 @@ export const NoteForm = ({ onSubmit, onCancel }: NoteFormProps) => {
             className={styles.noCategoryBtn(category === undefined)}
           >
             Sin categoría
+          </button>
+        </div>
+      </FormField>
+
+      <FormField label="Ícono" htmlFor="note-icon">
+        <div className={styles.iconList} id="note-icon">
+          {NOTE_ICON_KEYS.map((key) => {
+            const Icon = NOTE_ICONS[key];
+            return (
+              <button
+                key={key}
+                type="button"
+                onClick={() => setIcon(key === icon ? undefined : key)}
+                aria-label={`Ícono ${key}`}
+                className={styles.iconBtn(icon === key)}
+              >
+                <Icon size={16} />
+              </button>
+            );
+          })}
+          <button
+            type="button"
+            onClick={() => setIcon(undefined)}
+            className={styles.noIconBtn(icon === undefined)}
+          >
+            Sin ícono
           </button>
         </div>
       </FormField>

@@ -35,6 +35,21 @@ const styles = {
         ? 'border-slate-900 bg-slate-100 text-slate-900'
         : 'border-slate-300 text-slate-500 hover:bg-slate-50',
     ),
+  iconList: 'flex flex-wrap items-center gap-2',
+  iconBtn: (active: boolean) =>
+    clsx(
+      'flex size-9 items-center justify-center rounded-xl border-2 transition cursor-pointer hover:bg-slate-50',
+      active
+        ? 'border-slate-900 bg-slate-100 text-slate-900'
+        : 'border-slate-200 text-slate-500',
+    ),
+  noIconBtn: (active: boolean) =>
+    clsx(
+      'rounded-full border border-dashed px-3 py-1 text-xs transition-colors cursor-pointer',
+      active
+        ? 'border-slate-900 bg-slate-100 text-slate-900'
+        : 'border-slate-300 text-slate-500 hover:bg-slate-50',
+    ),
   actions: 'mt-2 flex justify-end gap-3',
 };
 

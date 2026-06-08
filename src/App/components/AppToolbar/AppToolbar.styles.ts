@@ -1,5 +1,6 @@
 const styles = {
-  toolbar: 'mb-6 flex flex-col gap-3 sm:mb-8 sm:gap-4',
+  toolbar:
+    'mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-center sm:justify-between sm:gap-4',
 
   searchWrapper: 'relative w-full sm:max-w-sm',
 
@@ -7,9 +8,12 @@ const styles = {
     'pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400',
 
   searchInput:
-    'w-full rounded-lg border border-slate-200 bg-white py-2 pl-9 pr-4 text-sm text-slate-900 placeholder:text-slate-400 transition-all duration-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200',
+    'w-full rounded-lg border border-slate-200 bg-white py-2 pl-9 pr-4 text-base sm:text-sm text-slate-900 placeholder:text-slate-400 transition-all duration-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200',
 
-  filters: 'flex flex-wrap items-center gap-2',
+  filters:
+    'grid grid-cols-4 gap-1.5 sm:flex sm:flex-wrap sm:items-center sm:gap-2',
+
+  filterBtn: 'rounded-xl min-h-10 max-sm:w-full max-sm:justify-center',
 };
 
 export default styles;

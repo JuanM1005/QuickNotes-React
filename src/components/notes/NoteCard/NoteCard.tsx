@@ -1,18 +1,16 @@
 import clsx from 'clsx';
-import {
-  FaRegCalendarAlt,
-  FaRegTrashAlt,
-  FaRegStar,
-  FaStar,
-} from 'react-icons/fa';
+import { FaRegTrashAlt, FaRegStar, FaStar } from 'react-icons/fa';
+import { LuFileText, LuBriefcase, LuUser, LuLightbulb } from 'react-icons/lu';
+import type { IconType } from 'react-icons';
 
-import { formatDate } from '@/utils/formatDate';
+import { formatDate } from '@/utils/formatDate.utils';
 import { useNotes } from '@/context/notes';
 import type { NoteCategory } from '@/types/note.types';
 import type { NoteCardProps } from './NoteCard.types';
-import styles, { noteColorStyles, badgeColorStyles } from './NoteCard.styles';
+import { NOTE_ICONS } from '@/data/noteIcons.data';
 import { Button } from '@/components/ui/Button';
 import { useState } from 'react';
+import styles, { iconBoxStyles, categoryBadgeStyles } from './NoteCard.styles';
 
 const CATEGORY_LABELS: Record<NoteCategory, string> = {
   work: 'Trabajo',
@@ -20,55 +18,70 @@ const CATEGORY_LABELS: Record<NoteCategory, string> = {
   ideas: 'Ideas',
 };
 
+const CATEGORY_ICONS: Record<NoteCategory, IconType> = {
+  work: LuBriefcase,
+  personal: LuUser,
+  ideas: LuLightbulb,
+};
+
 export const NoteCard = ({ note }: NoteCardProps) => {
   const { requestDeleteNote } = useNotes();
   const [selected, setSelected] = useState<boolean>(false);
 
-  const colorClassname = note.color
-    ? noteColorStyles[note.color]
-    : styles.defaultColor;
-
-  const badgeClassname = note.color
-    ? badgeColorStyles[note.color]
-    : styles.defaultBadge;
+  const iconBoxClass = note.color
+    ? iconBoxStyles[note.color]
+    : styles.iconBoxDefault;
+  const NoteIcon = note.icon ? NOTE_ICONS[note.icon] : LuFileText;
 
   const handleFavoriteClick = (): void => {
-    console.log('Agregar a favoritos proximamente!');
+    alert(
+      'Favoritos próximamente, por el momento solo visualización del estado del botón.',
+    );
     setSelected((prev) => !prev);
   };
 
   const handleDeleteClick = (): void => requestDeleteNote(note.id);
 
   return (
-    <article className={clsx(styles.card, colorClassname)}>
-      <header className={styles.header}>
-        <div className="min-w-0">
-          {note.category && (
-            <span className={clsx(styles.badge, badgeClassname)}>
-              {CATEGORY_LABELS[note.category]}
-            </span>
-          )}
-          <h3 className={styles.title}>{note.title}</h3>
-        </div>
-      </header>
-
-      <div className={styles.body}>
-        <p className={styles.date}>
-          <FaRegCalendarAlt size={15} />
-          <span>{formatDate(note.createdAt)}</span>
-        </p>
-
-        <p className={styles.content}>{note.content}</p>
+    <article className={styles.card}>
+      <div className={clsx(styles.iconBox, iconBoxClass)}>
+        <NoteIcon size={28} />
       </div>
 
-      <div className={styles.footer}>
+      <div className={styles.body}>
+        <h3 className={styles.title}>{note.title}</h3>
+
+        <p className={styles.content}>{note.content}</p>
+
+        <div className={styles.footer}>
+          <span className={styles.date}>{formatDate(note.createdAt)}</span>
+
+          {note.category &&
+            (() => {
+              const CategoryIcon = CATEGORY_ICONS[note.category!];
+              return (
+                <>
+                  <span className={styles.separator}>•</span>
+                  <span
+                    className={clsx(
+                      styles.badge,
+                      categoryBadgeStyles[note.category!],
+                    )}
+                  >
+                    <CategoryIcon size={10} />
+                    {CATEGORY_LABELS[note.category!]}
+                  </span>
+                </>
+              );
+            })()}
+        </div>
+      </div>
+
+      <div className={styles.actions}>
         <Button
           variant="unstyled"
           onClick={handleFavoriteClick}
-          className={clsx(
-            styles.actionBtn,
-            selected ? 'text-amber-500' : styles.favoriteBtn,
-          )}
+          className={styles.favoriteBtn(selected)}
         >
           {selected ? <FaStar size={16} /> : <FaRegStar size={16} />}
         </Button>
@@ -76,9 +89,9 @@ export const NoteCard = ({ note }: NoteCardProps) => {
         <Button
           variant="unstyled"
           onClick={handleDeleteClick}
-          className={clsx(styles.actionBtn, styles.deleteBtn)}
+          className={styles.deleteBtn}
         >
-          <FaRegTrashAlt size={16} />
+          <FaRegTrashAlt size={18} />
         </Button>
       </div>
     </article>

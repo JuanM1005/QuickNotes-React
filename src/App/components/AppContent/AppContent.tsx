@@ -4,6 +4,8 @@ import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { AppHeader } from '../AppHeader';
 import { AppToolbar } from '../AppToolbar';
 import { useNotesFilter } from '../../hooks/useNotesFilter';
+import { MdKeyboardArrowRight } from 'react-icons/md';
+import { Button } from '@/components/ui/Button';
 import styles from './AppContent.styles';
 
 export const AppContent = () => {
@@ -16,6 +18,10 @@ export const AppContent = () => {
     setActiveFilter,
   } = useNotesFilter();
 
+  const handleViewAllNotes = (): void => {
+    alert('Próximamente...');
+  };
+
   return (
     <div className={styles.container}>
       <AppHeader />
@@ -26,6 +32,19 @@ export const AppContent = () => {
         onSearch={setSearchQuery}
         onFilterChange={setActiveFilter}
       />
+
+      <div className={styles.sectionHeader}>
+        <h2 className={styles.sectionTitle}>Notas recientes</h2>
+
+        <Button
+          variant="unstyled"
+          className={styles.viewAllBtn}
+          onClick={handleViewAllNotes}
+        >
+          Ver todas
+          <MdKeyboardArrowRight size={18} />
+        </Button>
+      </div>
 
       <NoteList notes={filteredNotes} />
 

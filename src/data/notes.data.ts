@@ -9,6 +9,7 @@ export const NOTES: Note[] = [
     updatedAt: '2026-06-04T10:30:00.000Z',
     color: 'blue',
     category: 'work',
+    icon: 'book',
   },
   {
     id: '2',
@@ -18,6 +19,7 @@ export const NOTES: Note[] = [
     updatedAt: '2026-06-04T11:15:00.000Z',
     color: 'yellow',
     category: 'ideas',
+    icon: 'lightbulb',
   },
   {
     id: '3',
@@ -27,6 +29,7 @@ export const NOTES: Note[] = [
     updatedAt: '2026-06-04T12:00:00.000Z',
     color: 'pink',
     category: 'personal',
+    icon: 'heart',
   },
   {
     id: '4',
@@ -36,6 +39,7 @@ export const NOTES: Note[] = [
     updatedAt: '2026-06-04T13:20:00.000Z',
     color: 'green',
     category: 'work',
+    icon: 'code',
   },
   {
     id: '5',
@@ -45,6 +49,7 @@ export const NOTES: Note[] = [
     updatedAt: '2026-06-04T14:10:00.000Z',
     color: 'purple',
     category: 'ideas',
+    icon: 'flag',
   },
   {
     id: '6',
@@ -54,6 +59,7 @@ export const NOTES: Note[] = [
     updatedAt: '2026-06-04T15:00:00.000Z',
     color: 'orange',
     category: 'personal',
+    icon: 'shopping',
   },
   {
     id: '7',
@@ -64,6 +70,7 @@ export const NOTES: Note[] = [
     updatedAt: '2026-06-04T16:30:00.000Z',
     color: 'blue',
     category: 'work',
+    icon: 'briefcase',
   },
   {
     id: '8',
@@ -73,6 +80,7 @@ export const NOTES: Note[] = [
     updatedAt: '2026-06-04T17:15:00.000Z',
     color: 'red',
     category: 'ideas',
+    icon: 'star',
   },
   {
     id: '9',
@@ -82,5 +90,6 @@ export const NOTES: Note[] = [
     updatedAt: '2026-06-04T18:00:00.000Z',
     color: 'yellow',
     category: 'personal',
+    icon: 'home',
   },
 ];

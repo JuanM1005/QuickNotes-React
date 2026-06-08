@@ -4,7 +4,7 @@ import {
   type SetStateAction,
   type SubmitEvent,
 } from 'react';
-import type { NoteCategory, NoteColor } from '@/types/note.types';
+import type { NoteCategory, NoteColor, NoteIcon } from '@/types/note.types';
 import type { NoteFormProps } from '../NoteForm.types';
 
 interface UseNoteFormReturn {
@@ -12,10 +12,12 @@ interface UseNoteFormReturn {
   content: string;
   color: NoteColor | undefined;
   category: NoteCategory | undefined;
+  icon: NoteIcon | undefined;
   setTitle: Dispatch<SetStateAction<string>>;
   setContent: Dispatch<SetStateAction<string>>;
   setColor: Dispatch<SetStateAction<NoteColor | undefined>>;
   setCategory: Dispatch<SetStateAction<NoteCategory | undefined>>;
+  setIcon: Dispatch<SetStateAction<NoteIcon | undefined>>;
   resetForm: () => void;
   handleSubmit: (e: SubmitEvent<HTMLFormElement>) => void;
   handleCancel: () => void;
@@ -30,12 +32,14 @@ export const useNoteForm = ({
   const [content, setContent] = useState<string>('');
   const [color, setColor] = useState<NoteColor | undefined>(undefined);
   const [category, setCategory] = useState<NoteCategory | undefined>(undefined);
+  const [icon, setIcon] = useState<NoteIcon | undefined>(undefined);
 
   const resetForm = (): void => {
     setTitle('');
     setContent('');
     setColor(undefined);
     setCategory(undefined);
+    setIcon(undefined);
   };
 
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>): void => {
@@ -46,7 +50,13 @@ export const useNoteForm = ({
 
     if (!trimmedTitle || !trimmedContent) return;
 
-    onSubmit({ title: trimmedTitle, content: trimmedContent, color, category });
+    onSubmit({
+      title: trimmedTitle,
+      content: trimmedContent,
+      color,
+      category,
+      icon,
+    });
 
     resetForm();
   };
@@ -63,10 +73,12 @@ export const useNoteForm = ({
     content,
     color,
     category,
+    icon,
     setTitle,
     setContent,
     setColor,
     setCategory,
+    setIcon,
     resetForm,
     handleSubmit,
     handleCancel,
