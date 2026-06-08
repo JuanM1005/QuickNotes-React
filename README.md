@@ -242,13 +242,16 @@ Las fechas se guardan en formato ISO porque en el futuro se usará `localStorage
 
 ## Estado actual
 
-- Grid responsive de notas con colores, categorías y badges
-- Crear notas desde un modal accesible (vía sidebar quick action)
-- Eliminar notas con modal de confirmación
-- Marcar notas como favoritas (estado local por tarjeta)
-- Búsqueda en tiempo real con debounce
-- Filtros por categoría
-- Sidebar colapsable con transición animada
+- Grid responsive de notas con diseño visual por colores, categorías y badges.
+- Creación de notas desde un modal accesible mediante la acción rápida de la sidebar.
+- Eliminación de notas con modal de confirmación.
+- Marcado de notas como favoritas con estado local por tarjeta.
+- Búsqueda en tiempo real con debounce.
+- Filtros por categoría.
+- Sidebar colapsable con transición animada.
+- Persistencia de notas en localStorage.
+
+> Actualmente el proyecto se encuentra en una versión inicial funcional, enfocada en practicar React, TypeScript, componentes reutilizables, manejo de estado y persistencia local.
 
 ## Próximas mejoras
 
