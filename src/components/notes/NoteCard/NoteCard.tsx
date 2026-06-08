@@ -1,42 +1,15 @@
 import clsx from 'clsx';
 import { FaRegTrashAlt, FaRegStar, FaStar } from 'react-icons/fa';
-import {
-  LuFileText,
-  LuBriefcase,
-  LuUser,
-  LuLightbulb,
-  LuBookOpen,
-  LuClipboardList,
-  LuBell,
-} from 'react-icons/lu';
-import type { IconType } from 'react-icons';
+import { LuFileText } from 'react-icons/lu';
 
 import { formatDate } from '@/utils/formatDate.utils';
 import { useNotes } from '@/context/notes';
-import type { NoteCategory } from '@/types/note.types';
 import type { NoteCardProps } from './NoteCard.types';
 import { NOTE_ICONS } from '@/data/noteIcons.data';
 import { Button } from '@/components/ui/Button';
 import { useState } from 'react';
 import styles, { iconBoxStyles, categoryBadgeStyles } from './NoteCard.styles';
-
-const CATEGORY_LABELS: Record<NoteCategory, string> = {
-  work: 'Trabajo',
-  personal: 'Personal',
-  ideas: 'Ideas',
-  study: 'Estudio',
-  tasks: 'Tareas',
-  reminders: 'Recordatorios',
-};
-
-const CATEGORY_ICONS: Record<NoteCategory, IconType> = {
-  work: LuBriefcase,
-  personal: LuUser,
-  ideas: LuLightbulb,
-  study: LuBookOpen,
-  tasks: LuClipboardList,
-  reminders: LuBell,
-};
+import { CATEGORY_LABELS, CATEGORY_ICONS } from './NoteCard.data';
 
 export const NoteCard = ({ note }: NoteCardProps) => {
   const { requestDeleteNote } = useNotes();

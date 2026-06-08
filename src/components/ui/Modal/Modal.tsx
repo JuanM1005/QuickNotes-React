@@ -50,6 +50,8 @@ export const Modal = ({
         className={clsx(styles.modalContainerStyles, className)}
         onClick={handleModalClick}
       >
+        <span className={styles.modalGrabHandleStyles} aria-hidden="true" />
+
         {title && (
           <div id="modal-title">
             <ModalHeader title={title} onClose={onClose} />
