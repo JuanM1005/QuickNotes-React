@@ -9,7 +9,7 @@ export const SidebarNav = () => {
 
   const handleClick = (id: SidebarItemId, label: string): void => {
     setActiveId(id);
-    alert(`Proximamente la sección: "${label}"`)
+    alert(`Proximamente la sección: "${label}"`);
   };
 
   return (
