@@ -1,8 +1,7 @@
 import type { ChangeEvent } from 'react';
 import clsx from 'clsx';
 
-import type { NoteFormProps } from './NoteForm.types';
-import type { NoteCategory, NoteColor } from '@/types/note.types';
+import { type NoteFormProps, AVAILABLE_CATEGORIES, AVAILABLE_COLORS } from './NoteForm.types';
 import { NOTE_ICONS, NOTE_ICON_KEYS } from '@/data/noteIcons.data';
 import { Button } from '@/components/ui/Button';
 import { FormField } from '@/components/ui/FormField';
@@ -10,24 +9,6 @@ import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
 import styles, { colorOptionStyles } from './NoteForm.styles';
 import { useNoteForm } from './hooks/useNoteForm';
-
-const AVAILABLE_COLORS: NoteColor[] = [
-  'blue',
-  'green',
-  'yellow',
-  'pink',
-  'purple',
-  'red',
-];
-
-const AVAILABLE_CATEGORIES: { label: string; value: NoteCategory }[] = [
-  { label: 'Trabajo', value: 'work' },
-  { label: 'Personal', value: 'personal' },
-  { label: 'Ideas', value: 'ideas' },
-  { label: 'Estudio', value: 'study' },
-  { label: 'Tareas', value: 'tasks' },
-  { label: 'Recordatorios', value: 'reminders' },
-];
 
 export const NoteForm = ({ onSubmit, onCancel }: NoteFormProps) => {
   const {
@@ -56,7 +37,7 @@ export const NoteForm = ({ onSubmit, onCancel }: NoteFormProps) => {
           onChange={(e: ChangeEvent<HTMLInputElement>): void =>
             setTitle(e.target.value)
           }
-          placeholder="Ej: Aprender React"
+          placeholder="Escribe el titulo de tu nota"
           autoFocus
         />
       </FormField>

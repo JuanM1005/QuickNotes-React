@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/Button';
 import { useState } from 'react';
 import styles, { iconBoxStyles, categoryBadgeStyles } from './NoteCard.styles';
 import { CATEGORY_LABELS, CATEGORY_ICONS } from './NoteCard.data';
+import toast from 'react-hot-toast';
 
 export const NoteCard = ({ note }: NoteCardProps) => {
   const { requestDeleteNote } = useNotes();
@@ -21,7 +22,7 @@ export const NoteCard = ({ note }: NoteCardProps) => {
   const NoteIcon = note.icon ? NOTE_ICONS[note.icon] : LuFileText;
 
   const handleFavoriteClick = (): void => {
-    alert(
+    toast(
       'Favoritos próximamente, por el momento solo visualización del estado del botón.',
     );
     setSelected((prev) => !prev);
