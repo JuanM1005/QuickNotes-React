@@ -49,13 +49,13 @@ Después abre la URL que muestra la terminal, normalmente `http://localhost:5173
 
 ## Scripts disponibles
 
-| Script                 | Descripción                                           |
-| ---------------------- | ----------------------------------------------------- |
-| `bun run dev`          | Inicia el servidor de desarrollo.                     |
-| `bun run build`        | Genera la versión de producción.                      |
-| `bun run preview`      | Previsualiza la versión de producción.                |
-| `bun run format`       | Formatea los archivos del proyecto con Prettier.      |
-| `bun run format:check` | Revisa el formato sin modificar archivos.             |
+| Script                 | Descripción                                      |
+| ---------------------- | ------------------------------------------------ |
+| `bun run dev`          | Inicia el servidor de desarrollo.                |
+| `bun run build`        | Genera la versión de producción.                 |
+| `bun run preview`      | Previsualiza la versión de producción.           |
+| `bun run format`       | Formatea los archivos del proyecto con Prettier. |
+| `bun run format:check` | Revisa el formato sin modificar archivos.        |
 
 ## Estructura del proyecto
 
@@ -120,7 +120,13 @@ src/
 ## Modelo de datos
 
 ```ts
-export type NoteColor = 'blue' | 'green' | 'yellow' | 'pink' | 'purple' | 'orange';
+export type NoteColor =
+  | 'blue'
+  | 'green'
+  | 'yellow'
+  | 'pink'
+  | 'purple'
+  | 'orange';
 export type NoteCategory = 'work' | 'personal' | 'ideas';
 export type NoteFilter = 'all' | NoteCategory;
 
@@ -191,15 +197,15 @@ Componente reutilizable con variantes `primary`, `secondary`, `selected`, `unsty
 
 ## Hooks personalizados
 
-| Hook               | Descripción                                                                 |
-| ------------------ | --------------------------------------------------------------------------- |
-| `useNoteModal`     | Estado del modal de nueva nota: `isOpen`, `open`, `close`, `handleSubmit`. |
-| `useNotesFilter`   | Búsqueda con debounce y filtro por categoría. Retorna `filteredNotes`.      |
-| `useNoteForm`      | Estado del formulario, validación y reset.                                  |
-| `useSidebar`       | Accede a `isCollapsed` y `toggleSidebar` desde cualquier componente.        |
-| `useEscapeKey`     | Dispara un callback al presionar Escape.                                    |
-| `useFocusTrap`     | Aplica `inert` al `#root` mientras el modal está abierto.                  |
-| `useLockScroll`    | Bloquea el scroll del body mientras el modal está abierto.                 |
+| Hook             | Descripción                                                                |
+| ---------------- | -------------------------------------------------------------------------- |
+| `useNoteModal`   | Estado del modal de nueva nota: `isOpen`, `open`, `close`, `handleSubmit`. |
+| `useNotesFilter` | Búsqueda con debounce y filtro por categoría. Retorna `filteredNotes`.     |
+| `useNoteForm`    | Estado del formulario, validación y reset.                                 |
+| `useSidebar`     | Accede a `isCollapsed` y `toggleSidebar` desde cualquier componente.       |
+| `useEscapeKey`   | Dispara un callback al presionar Escape.                                   |
+| `useFocusTrap`   | Aplica `inert` al `#root` mientras el modal está abierto.                  |
+| `useLockScroll`  | Bloquea el scroll del body mientras el modal está abierto.                 |
 
 ## Utilidades
 

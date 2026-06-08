@@ -1,18 +1,22 @@
-import { useState, type ReactNode } from 'react';
-import { NOTES } from '@/data/notes.data';
+import { useEffect, useState, type ReactNode } from 'react';
 import type { Note, NoteInput } from '@/types/note.types';
 import { createNote } from '@/utils/createNote';
 import { NotesContext } from './NotesContext';
+import { getStoredNotes, saveNotes } from '@/storage/notes.storage';
 
 interface NotesProviderProps {
   children: ReactNode;
 }
 
 export const NotesProvider = ({ children }: NotesProviderProps) => {
-  const [notes, setNotes] = useState<Note[]>(NOTES);
+  const [notes, setNotes] = useState<Note[]>(getStoredNotes);
   // Se guarda el objeto completo (no solo el id) porque el ConfirmDialog
   // necesita el título de la nota para mostrarlo en el mensaje de confirmación.
   const [noteToDelete, setNoteToDelete] = useState<Note | null>(null);
+
+  useEffect(() => {
+    saveNotes(notes);
+  }, [notes]);
 
   const handleAddNote = (input: NoteInput): void => {
     const newNote = createNote(input);
