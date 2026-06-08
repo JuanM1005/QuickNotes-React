@@ -48,7 +48,7 @@ export const AppToolbar = ({
             className={styles.filterBtn}
             onClick={() => onFilterChange(value)}
           >
-            <Icon size={12} />
+            <Icon size={12} className="shrink-0" />
             {label}
           </Button>
         ))}

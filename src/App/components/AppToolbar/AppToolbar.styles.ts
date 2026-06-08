@@ -10,10 +10,9 @@ const styles = {
   searchInput:
     'w-full rounded-lg border border-slate-200 bg-white py-2 pl-9 pr-4 text-base sm:text-sm text-slate-900 placeholder:text-slate-400 transition-all duration-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200',
 
-  filters:
-    'grid grid-cols-4 gap-1.5 sm:flex sm:flex-wrap sm:items-center sm:gap-2',
+  filters: 'flex flex-wrap items-center gap-1.5 sm:gap-2',
 
-  filterBtn: 'rounded-xl min-h-10 max-sm:w-full max-sm:justify-center',
+  filterBtn: 'shrink-0 rounded-xl min-h-10',
 };
 
 export default styles;
