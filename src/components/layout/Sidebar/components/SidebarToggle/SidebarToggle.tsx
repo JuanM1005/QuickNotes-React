@@ -9,7 +9,7 @@ export const SidebarToggle = () => {
   return (
     <Button
       variant="unstyled"
-      className={styles.button}
+      className={styles.button(isCollapsed)}
       onClick={toggleSidebar}
     >
       {isCollapsed ? <LuChevronRight size={14} /> : <LuChevronLeft size={14} />}

@@ -2,6 +2,7 @@ import { AppContent } from './components/AppContent/AppContent';
 import { NotesProvider } from '@/context/notes';
 import styles from './App.styles';
 import { Sidebar, SidebarProvider } from '@/components/layout/Sidebar';
+import { MobileNav } from '@/components/layout/MobileNav';
 
 const App = () => {
   return (
@@ -10,7 +11,8 @@ const App = () => {
         <main className={styles.main}>
           <Sidebar />
           <AppContent />
-        </main>{' '}
+          <MobileNav />
+        </main>
       </SidebarProvider>
     </NotesProvider>
   );
