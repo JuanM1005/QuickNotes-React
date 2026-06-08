@@ -5,7 +5,7 @@ import { useSidebar } from './context/useSidebarContext';
 import { SidebarToggle } from './components/SidebarToggle';
 
 export const Sidebar = () => {
-  const { isCollapsed, toggleSidebar } = useSidebar();
+  const { isCollapsed } = useSidebar();
 
   return (
     <div className="hidden sm:block">

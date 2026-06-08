@@ -12,7 +12,7 @@ const App = () => {
           <Sidebar />
           <AppContent />
           <MobileNav />
-        </main>
+          </main>
       </SidebarProvider>
     </NotesProvider>
   );
