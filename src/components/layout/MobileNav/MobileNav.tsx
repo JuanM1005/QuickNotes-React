@@ -27,7 +27,11 @@ export const MobileNav = () => {
           </button>
         ))}
 
-        <button className={styles.addBtn} onClick={open} aria-label="Nueva nota">
+        <button
+          className={styles.addBtn}
+          onClick={open}
+          aria-label="Nueva nota"
+        >
           <LuPlus size={22} />
         </button>
 
