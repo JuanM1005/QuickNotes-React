@@ -22,9 +22,15 @@ export const AppToolbar = ({
   return (
     <div className={styles.toolbar}>
       <div className={styles.searchWrapper}>
+        <label htmlFor="search-notes" className="sr-only">
+          Buscar notas
+        </label>
+
         <FaSearch className={styles.searchIcon} size={14} />
 
         <input
+          id="search-notes"
+          name="search-notes"
           type="text"
           placeholder="Buscar notas..."
           value={searchQuery}
