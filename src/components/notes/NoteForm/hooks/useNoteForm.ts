@@ -4,16 +4,18 @@ import {
   type SetStateAction,
   type SubmitEvent,
 } from 'react';
-import type { NoteColor } from '@/types/note.types';
+import type { NoteCategory, NoteColor } from '@/types/note.types';
 import type { NoteFormProps } from '../NoteForm.types';
 
 interface UseNoteFormReturn {
   title: string;
   content: string;
   color: NoteColor | undefined;
+  category: NoteCategory | undefined;
   setTitle: Dispatch<SetStateAction<string>>;
   setContent: Dispatch<SetStateAction<string>>;
   setColor: Dispatch<SetStateAction<NoteColor | undefined>>;
+  setCategory: Dispatch<SetStateAction<NoteCategory | undefined>>;
   resetForm: () => void;
   handleSubmit: (e: SubmitEvent<HTMLFormElement>) => void;
   handleCancel: () => void;
@@ -27,24 +29,24 @@ export const useNoteForm = ({
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [color, setColor] = useState<NoteColor | undefined>(undefined);
+  const [category, setCategory] = useState<NoteCategory | undefined>(undefined);
 
   const resetForm = (): void => {
     setTitle('');
     setContent('');
     setColor(undefined);
+    setCategory(undefined);
   };
 
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    // Si el usuario escribe "  " técnicamente el input no está vacío
-    // En este caso con el método .trim() quitamos los espacios en blanco y validamos que los input no este vacio
     const trimmedTitle: string = title.trim();
     const trimmedContent: string = content.trim();
 
     if (!trimmedTitle || !trimmedContent) return;
 
-    onSubmit({ title: trimmedTitle, content: trimmedContent, color });
+    onSubmit({ title: trimmedTitle, content: trimmedContent, color, category });
 
     resetForm();
   };
@@ -60,9 +62,11 @@ export const useNoteForm = ({
     title,
     content,
     color,
+    category,
     setTitle,
     setContent,
     setColor,
+    setCategory,
     resetForm,
     handleSubmit,
     handleCancel,

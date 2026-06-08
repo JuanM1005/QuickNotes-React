@@ -2,15 +2,12 @@ import type { ChangeEvent } from 'react';
 import clsx from 'clsx';
 
 import type { NoteFormProps } from './NoteForm.types';
-import type { NoteColor } from '@/types/note.types';
+import type { NoteCategory, NoteColor } from '@/types/note.types';
 import { Button } from '@/components/ui/Button';
 import { FormField } from '@/components/ui/FormField';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
-import styles, {
-  colorOptionStyles,
-  colorSelectedStyles,
-} from './NoteForm.styles';
+import styles, { colorOptionStyles } from './NoteForm.styles';
 import { useNoteForm } from './hooks/useNoteForm';
 
 const AVAILABLE_COLORS: NoteColor[] = [
@@ -19,6 +16,13 @@ const AVAILABLE_COLORS: NoteColor[] = [
   'yellow',
   'pink',
   'purple',
+  'red',
+];
+
+const AVAILABLE_CATEGORIES: { label: string; value: NoteCategory }[] = [
+  { label: 'Trabajo', value: 'work' },
+  { label: 'Personal', value: 'personal' },
+  { label: 'Ideas', value: 'ideas' },
 ];
 
 export const NoteForm = ({ onSubmit, onCancel }: NoteFormProps) => {
@@ -26,9 +30,11 @@ export const NoteForm = ({ onSubmit, onCancel }: NoteFormProps) => {
     title,
     content,
     color,
+    category,
     setTitle,
     setContent,
     setColor,
+    setCategory,
     handleSubmit,
     handleCancel,
     isSubmitDisabled,
@@ -66,6 +72,30 @@ export const NoteForm = ({ onSubmit, onCancel }: NoteFormProps) => {
         />
       </FormField>
 
+      <FormField label="Categoría" htmlFor="note-category">
+        <div className={styles.categoryList} id="note-category">
+          {AVAILABLE_CATEGORIES.map(({ label, value }) => (
+            <button
+              key={value}
+              type="button"
+              onClick={() =>
+                setCategory(value === category ? undefined : value)
+              }
+              className={styles.categoryBtn(category === value)}
+            >
+              {label}
+            </button>
+          ))}
+          <button
+            type="button"
+            onClick={() => setCategory(undefined)}
+            className={styles.noCategoryBtn(category === undefined)}
+          >
+            Sin categoría
+          </button>
+        </div>
+      </FormField>
+
       <FormField label="Color" htmlFor="note-color">
         <div className={styles.colorList} id="note-color">
           {AVAILABLE_COLORS.map((c) => (
@@ -78,7 +108,6 @@ export const NoteForm = ({ onSubmit, onCancel }: NoteFormProps) => {
                 styles.colorButton,
                 colorOptionStyles[c],
                 color === c && styles.colorButtonSelected,
-                color === c && colorSelectedStyles[c],
               )}
             />
           ))}

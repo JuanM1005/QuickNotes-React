@@ -8,6 +8,7 @@ export const createNote = (input: NoteInput): Note => {
     title: input.title,
     content: input.content,
     color: input.color,
+    category: input.category,
     createdAt: now,
     updatedAt: now,
   };

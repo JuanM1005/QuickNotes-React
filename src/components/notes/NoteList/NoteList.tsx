@@ -1,10 +1,12 @@
 import { NoteCard } from '@/components/notes/NoteCard';
-import { useNotes } from '@/context/notes';
+import type { Note } from '@/types/note.types';
 import styles from './NoteList.styles';
 
-export const NoteList = () => {
-  const { notes } = useNotes();
+interface NoteListProps {
+  notes: Note[];
+}
 
+export const NoteList = ({ notes }: NoteListProps) => {
   return (
     <section className={styles.cardGrid}>
       {notes.map((note) => (

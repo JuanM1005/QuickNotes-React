@@ -14,6 +14,6 @@ export const useNotes = (): NotesContextValue => {
   if (context === undefined) {
     throw new Error('useNotes debe usarse dentro de un NotesProvider');
   }
-  
+
   return context;
 };

@@ -22,7 +22,7 @@ export const NotesProvider = ({ children }: NotesProviderProps) => {
   // Borrado en 2 pasos: primero se registra la nota a eliminar (abre el diálogo),
   // luego el usuario confirma o cancela.
   const requestDeleteNote = (id: string): void => {
-    const note = notes.find((n) => n.id === id); // Busca la nota por su id y la guarda en noteToDelete 
+    const note = notes.find((n) => n.id === id); // Busca la nota por su id y la guarda en noteToDelete
     if (note) setNoteToDelete(note);
   };
 
