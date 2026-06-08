@@ -256,7 +256,7 @@ Las fechas se guardan en formato ISO porque en el futuro se usará `localStorage
 **Juan Antonio Aguirre Mares**  
 Estudiante de Ingeniería en Informática.
 
-Este proyecto fue desarrollado como parte de mi proceso de aprendizaje en React y TypeScript, con el objetivo de practicar la creación de componentes, manejo de estado, filtrado de datos y estructura modular de una aplicación web.
+Este proyecto fue desarrollado como parte de mi proceso de aprendizaje en Desarrollo Web, con el objetivo de practicar la creación de componentes, manejo de estado, filtrado de datos y estructura modular de una aplicación web.
 
 ## Herramientas de apoyo
 
