@@ -23,7 +23,7 @@ export const MobileNav = () => {
             className={styles.item(activeId === id)}
             onClick={() => setActiveId(id)}
           >
-            <Icon size={20} />
+            <Icon size={22} />
           </button>
         ))}
 
@@ -32,7 +32,7 @@ export const MobileNav = () => {
           onClick={open}
           aria-label="Nueva nota"
         >
-          <LuPlus size={22} />
+          <LuPlus size={24} />
         </button>
 
         {rightItems.map(({ id, icon: Icon }) => (
@@ -41,7 +41,7 @@ export const MobileNav = () => {
             className={styles.item(activeId === id)}
             onClick={() => setActiveId(id)}
           >
-            <Icon size={20} />
+            <Icon size={22} />
           </button>
         ))}
       </nav>
