@@ -9,7 +9,8 @@ import { Button } from '@/components/ui/Button';
 import styles from './AppContent.styles';
 
 export const AppContent = () => {
-  const { notes, noteToDelete, confirmDeleteNote, cancelDeleteNote } = useNotes();
+  const { notes, noteToDelete, confirmDeleteNote, cancelDeleteNote } =
+    useNotes();
   const {
     searchQuery,
     activeFilter,
@@ -19,7 +20,9 @@ export const AppContent = () => {
   } = useNotesFilter();
 
   const handleViewAllNotes = (): void => {
-    alert('Próximamente podrás ver y gestionar todas tus notas desde una vista dedicada.');
+    alert(
+      'Próximamente podrás ver y gestionar todas tus notas desde una vista dedicada.',
+    );
   };
 
   return (

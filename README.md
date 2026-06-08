@@ -161,15 +161,15 @@ export interface Note {
 
 ### Campos
 
-| Campo       | Tipo           | Descripción                                             |
-| ----------- | -------------- | ------------------------------------------------------- |
-| `id`        | `string`       | Identificador único generado con `crypto.randomUUID()`. |
-| `title`     | `string`       | Título breve de la nota.                                |
-| `content`   | `string`       | Contenido principal de la nota.                         |
-| `createdAt` | `string`       | Fecha de creación en formato ISO.                       |
-| `updatedAt` | `string`       | Fecha de última edición en formato ISO.                 |
-| `color`     | `NoteColor`    | Color opcional para personalizar la tarjeta (7 opciones). |
-| `category`  | `NoteCategory` | Categoría opcional: trabajo, personal o ideas.          |
+| Campo       | Tipo           | Descripción                                                           |
+| ----------- | -------------- | --------------------------------------------------------------------- |
+| `id`        | `string`       | Identificador único generado con `crypto.randomUUID()`.               |
+| `title`     | `string`       | Título breve de la nota.                                              |
+| `content`   | `string`       | Contenido principal de la nota.                                       |
+| `createdAt` | `string`       | Fecha de creación en formato ISO.                                     |
+| `updatedAt` | `string`       | Fecha de última edición en formato ISO.                               |
+| `color`     | `NoteColor`    | Color opcional para personalizar la tarjeta (7 opciones).             |
+| `category`  | `NoteCategory` | Categoría opcional: trabajo, personal o ideas.                        |
 | `icon`      | `NoteIcon`     | Ícono opcional para el encabezado visual de la tarjeta (10 opciones). |
 
 ## Componentes principales
