@@ -7,6 +7,7 @@ import { SIDEBAR_ITEMS } from '@/components/layout/Sidebar/data';
 import type { SidebarItemId } from '@/components/layout/Sidebar/data/Sidebar.data.types';
 import { Button } from '@/components/ui/Button';
 import styles from './MobileNav.styles';
+import toast from 'react-hot-toast';
 
 export const MobileNav = () => {
   const [activeId, setActiveId] = useState<SidebarItemId>('notes');
@@ -24,9 +25,9 @@ export const MobileNav = () => {
   // };
 
   // Solo para probar el estado del botón (cambia de color)
-  const handleNavClick = (id: SidebarItemId, label: string): void => {
+  const handleClick = (id: SidebarItemId, label: string): void => {
     setActiveId(id);
-    alert(`Sección "${label}" próximamente.`);
+    toast(`Disponible próximamente la sección: "${label}"`);
   };
 
   return (
@@ -37,7 +38,7 @@ export const MobileNav = () => {
             key={id}
             variant="unstyled"
             className={styles.item(activeId === id)}
-            onClick={() => handleNavClick(id, label)}
+            onClick={() => handleClick(id, label)}
           >
             <Icon size={20} />
             {label}
@@ -60,7 +61,7 @@ export const MobileNav = () => {
             key={id}
             variant="unstyled"
             className={styles.item(activeId === id)}
-            onClick={() => handleNavClick(id, label)}
+            onClick={() => handleClick(id, label)}
           >
             <Icon size={20} />
             {label}
