@@ -253,4 +253,13 @@ Las fechas se guardan en formato ISO porque en el futuro se usará `localStorage
 
 ## Autor
 
-Proyecto desarrollado como práctica de React y TypeScript.
+**Juan Antonio Aguirre Mares**  
+Estudiante de Ingeniería en Informática.
+
+Este proyecto fue desarrollado como parte de mi proceso de aprendizaje en React y TypeScript, con el objetivo de practicar la creación de componentes, manejo de estado, filtrado de datos y estructura modular de una aplicación web.
+
+## Herramientas de apoyo
+
+Durante el desarrollo utilicé herramientas de apoyo como Claude Code y ChatGPT para orientación, depuración y mejora de código.
+
+La implementación fue revisada, adaptada y comprendida manualmente, aplicando conocimientos previamente adquiridos como estudiante de Ingeniería en Informática.
