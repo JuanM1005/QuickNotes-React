@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { SidebarItem } from '../SidebarItem';
 import { SIDEBAR_ITEMS } from '../../data';
-import type { SidebarItemId } from '../../data/Sidebar.data.types';
+import type { SidebarItemId } from '../../data';
 import styles from './SidebarNav.styles';
 
 export const SidebarNav = () => {
   const [activeId, setActiveId] = useState<SidebarItemId>('notes');
+
+  const handleClick = (id: SidebarItemId, label: string): void => {
+    setActiveId(id);
+    alert(`Proximamente la sección: "${label}"`)
+  };
 
   return (
     <nav className={styles.nav}>
@@ -15,7 +20,7 @@ export const SidebarNav = () => {
           icon={item.icon}
           label={item.label}
           isActive={item.id === activeId}
-          onClick={() => setActiveId(item.id)}
+          onClick={() => handleClick(item.id, item.label)}
         />
       ))}
     </nav>
