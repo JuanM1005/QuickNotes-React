@@ -3,13 +3,14 @@ import { SidebarItem } from '../SidebarItem';
 import { SIDEBAR_ITEMS } from '../../data';
 import type { SidebarItemId } from '../../data';
 import styles from './SidebarNav.styles';
+import toast from 'react-hot-toast';
 
 export const SidebarNav = () => {
   const [activeId, setActiveId] = useState<SidebarItemId>('notes');
 
   const handleClick = (id: SidebarItemId, label: string): void => {
     setActiveId(id);
-    alert(`Proximamente la sección: "${label}"`);
+    toast(`Proximamente la sección: "${label}"`);
   };
 
   return (

@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/Button';
 import { SidebarQuickAction } from '../SidebarQuickAction';
 import { useSidebar } from '../../context/useSidebarContext';
 import styles from './SidebarFooter.styles';
+import toast from 'react-hot-toast';
 
 interface SidebarFooterProps {
   onOpenForm: () => void;
@@ -10,6 +11,10 @@ interface SidebarFooterProps {
 
 export const SidebarFooter = ({ onOpenForm }: SidebarFooterProps) => {
   const { isCollapsed } = useSidebar();
+
+  const handleLogout = (): void => {
+    toast('Cerrar sesión proximamente!');
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -20,7 +25,7 @@ export const SidebarFooter = ({ onOpenForm }: SidebarFooterProps) => {
       <Button
         variant="unstyled"
         className={styles.logoutBtn(isCollapsed)}
-        onClick={(): void => alert('Cerrar sesión proximamente!')}
+        onClick={handleLogout}
       >
         <LuLogOut size={18} className="shrink-0" />
         {!isCollapsed && <span>Cerrar sesión</span>}

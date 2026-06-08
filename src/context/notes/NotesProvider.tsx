@@ -3,6 +3,7 @@ import type { Note, NoteInput } from '@/types/note.types';
 import { createNote } from '@/utils/createNote.utils';
 import { NotesContext } from './NotesContext';
 import { getStoredNotes, saveNotes } from '@/storage/notes.storage';
+import toast from 'react-hot-toast';
 
 interface NotesProviderProps {
   children: ReactNode;
@@ -21,6 +22,7 @@ export const NotesProvider = ({ children }: NotesProviderProps) => {
   const handleAddNote = (input: NoteInput): void => {
     const newNote = createNote(input);
     setNotes((prev) => [newNote, ...prev]);
+    toast.success('Nota agregada correctamente.', { duration: 3000 });
   };
 
   // Borrado en 2 pasos: primero se registra la nota a eliminar (abre el diálogo),
@@ -34,6 +36,7 @@ export const NotesProvider = ({ children }: NotesProviderProps) => {
     if (!noteToDelete) return; // Si no hay nota a eliminar no se ejecuta la función
     setNotes((prev) => prev.filter((n) => n.id !== noteToDelete.id)); // Se elimina del estado
     setNoteToDelete(null); // Después se limpia noteToDelete para cerrar el diálogo.
+    toast.success('Nota eliminada correctamente.', { duration: 3000 });
   };
 
   // Solo limpia noteToDelete para cerrar el diálogo sin modificar

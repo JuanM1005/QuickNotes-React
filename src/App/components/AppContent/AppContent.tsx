@@ -7,6 +7,7 @@ import { useNotesFilter } from '../../hooks/useNotesFilter';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { Button } from '@/components/ui/Button';
 import styles from './AppContent.styles';
+import toast from 'react-hot-toast';
 
 export const AppContent = () => {
   const { notes, noteToDelete, confirmDeleteNote, cancelDeleteNote } =
@@ -20,7 +21,7 @@ export const AppContent = () => {
   } = useNotesFilter();
 
   const handleViewAllNotes = (): void => {
-    alert(
+    toast(
       'Próximamente podrás ver y gestionar todas tus notas desde una vista dedicada.',
     );
   };

@@ -3,6 +3,7 @@ import { NotesProvider } from '@/context/notes';
 import styles from './App.styles';
 import { Sidebar, SidebarProvider } from '@/components/layout/Sidebar';
 import { MobileNav } from '@/components/layout/MobileNav';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   return (
@@ -13,6 +14,8 @@ const App = () => {
           <AppContent />
           <MobileNav />
         </main>
+
+        <Toaster />
       </SidebarProvider>
     </NotesProvider>
   );
