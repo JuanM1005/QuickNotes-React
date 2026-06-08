@@ -252,10 +252,11 @@ Las fechas se guardan en formato ISO porque en el futuro se usará `localStorage
 
 ## Próximas mejoras
 
-- Persistir notas en `localStorage`
-- Editar notas existentes
-- Persistir favoritos
-- Modo oscuro
+- Permitir la edición de notas existentes.
+- Persistir notas favoritas en localStorage.
+- Implementar la funcionalidad completa de la sidebar, incluyendo las secciones de notas, favoritas, archivadas y papelera.
+- Agregar soporte para modo oscuro.
+- Evaluar la implementación de autenticación de usuario y cierre de sesión.
 
 ## Autor
 
