@@ -8,7 +8,7 @@ QuickNotes es una aplicación de notas construida con React, TypeScript, Vite y 
 
 ## Descripción
 
-La aplicación permite crear notas con título, contenido, color y categoría. Las notas se muestran en un grid responsive con badges de categoría, opciones de favorito y eliminación. Incluye una sidebar colapsable con navegación, acceso rápido para crear notas y búsqueda con filtros por categoría.
+La aplicación permite crear notas con título, contenido, color, categoría e ícono. Las notas se muestran en tarjetas horizontales con ícono contextual, badge de categoría, favoritos y eliminación con confirmación. Incluye una sidebar colapsable en escritorio, una barra de navegación dock en móvil, búsqueda en tiempo real y filtros por categoría. Es instalable como PWA y persiste los datos en `localStorage`.
 
 Este proyecto forma parte de una práctica progresiva para reforzar conceptos como:
 
@@ -26,11 +26,12 @@ Este proyecto forma parte de una práctica progresiva para reforzar conceptos co
 ## Tecnologías utilizadas
 
 - React 19
-- TypeScript
-- Vite
+- TypeScript ~6.0
+- Vite 8
 - Tailwind CSS v4
-- React Icons
+- React Icons v5
 - clsx
+- vite-plugin-pwa
 - Bun
 
 ## Instalación
@@ -75,6 +76,7 @@ src/
 │  └─ App.styles.ts
 ├─ components/
 │  ├─ layout/
+│  │  ├─ MobileNav/
 │  │  └─ Sidebar/
 │  │     ├─ components/
 │  │     │  ├─ SidebarBrand/
@@ -97,23 +99,26 @@ src/
 │  │  └─ NoteList/
 │  └─ ui/
 │     ├─ Button/
+│     ├─ ConfirmDialog/
 │     ├─ FormField/
 │     ├─ Input/
 │     ├─ Modal/
 │     │  └─ hooks/
 │     └─ Textarea/
+├─ constants/
 ├─ context/
 │  └─ notes/
 │     ├─ NotesContext.ts
 │     ├─ NotesProvider.tsx
 │     └─ useNotes.ts
 ├─ data/
+│  ├─ noteIcons.data.ts
 │  └─ notes.data.ts
 ├─ types/
 │  └─ note.types.ts
 ├─ utils/
-│  ├─ createNote.ts
-│  └─ formatDate.ts
+│  ├─ createNote.utils.ts
+│  └─ formatDate.utils.ts
 └─ main.tsx
 ```
 
@@ -126,9 +131,21 @@ export type NoteColor =
   | 'yellow'
   | 'pink'
   | 'purple'
+  | 'red'
   | 'orange';
 export type NoteCategory = 'work' | 'personal' | 'ideas';
 export type NoteFilter = 'all' | NoteCategory;
+export type NoteIcon =
+  | 'book'
+  | 'lightbulb'
+  | 'briefcase'
+  | 'code'
+  | 'heart'
+  | 'star'
+  | 'flag'
+  | 'music'
+  | 'home'
+  | 'shopping';
 
 export interface Note {
   id: string;
@@ -138,6 +155,7 @@ export interface Note {
   updatedAt: string;
   color?: NoteColor;
   category?: NoteCategory;
+  icon?: NoteIcon;
 }
 ```
 
@@ -150,10 +168,15 @@ export interface Note {
 | `content`   | `string`       | Contenido principal de la nota.                         |
 | `createdAt` | `string`       | Fecha de creación en formato ISO.                       |
 | `updatedAt` | `string`       | Fecha de última edición en formato ISO.                 |
-| `color`     | `NoteColor`    | Color opcional para personalizar la tarjeta.            |
+| `color`     | `NoteColor`    | Color opcional para personalizar la tarjeta (7 opciones). |
 | `category`  | `NoteCategory` | Categoría opcional: trabajo, personal o ideas.          |
+| `icon`      | `NoteIcon`     | Ícono opcional para el encabezado visual de la tarjeta (10 opciones). |
 
 ## Componentes principales
+
+### `MobileNav`
+
+Barra de navegación tipo dock visible solo en móvil. Contiene los ítems de navegación a izquierda y derecha con un botón central flotante para crear una nota nueva. Comparte los ítems de navegación con `Sidebar` vía `SIDEBAR_ITEMS`.
 
 ### `Sidebar`
 
@@ -175,17 +198,21 @@ Barra de herramientas con:
 
 ### `NoteCard`
 
-Tarjeta de nota con:
+Tarjeta horizontal con:
 
-- Badge de categoría (color sincronizado con el borde de la tarjeta)
-- Título y contenido
-- Fecha de creación formateada
-- Botón de favorito con ícono de estrella
-- Botón de eliminar
+- Caja de ícono a la izquierda, coloreada según `note.color` (fallback a `LuFileText`)
+- Título, contenido truncado y fecha de creación formateada
+- Badge de categoría con ícono (trabajo / personal / ideas)
+- Botón de favorito (estado local por tarjeta, persistencia pendiente)
+- Botón de eliminar que dispara `ConfirmDialog` vía `NotesContext`
 
 ### `NoteForm`
 
-Formulario controlado para crear notas. Incluye título, contenido, selector de color y selector de categoría con toggle (clic en la misma categoría la deselecciona).
+Formulario controlado para crear notas. Incluye título, contenido, selector de color, selector de ícono y selector de categoría con toggle (clic en la misma categoría la deselecciona).
+
+### `ConfirmDialog`
+
+Diálogo de confirmación reutilizable con variante `danger`. Se usa al eliminar notas y recibe callbacks `onConfirm` / `onCancel`. Se renderiza dentro de `AppContent` y su estado lo gestiona `NotesContext`.
 
 ### `Modal`
 
@@ -242,14 +269,16 @@ Las fechas se guardan en formato ISO porque en el futuro se usará `localStorage
 
 ## Estado actual
 
-- Grid responsive de notas con diseño visual por colores, categorías y badges.
-- Creación de notas desde un modal accesible mediante la acción rápida de la sidebar.
-- Eliminación de notas con modal de confirmación.
-- Marcado de notas como favoritas con estado local por tarjeta.
+- Tarjetas horizontales con ícono, color, categoría y badge.
+- Creación de notas desde un modal accesible (sidebar en escritorio, dock en móvil).
+- Eliminación de notas con diálogo de confirmación.
+- Marcado de notas como favoritas con estado local por tarjeta (persistencia pendiente).
 - Búsqueda en tiempo real con debounce.
 - Filtros por categoría.
-- Sidebar colapsable con transición animada.
-- Persistencia de notas en localStorage.
+- Sidebar colapsable con transición animada (escritorio).
+- Barra de navegación dock en móvil (`MobileNav`).
+- Persistencia de notas en `localStorage`.
+- Instalable como PWA.
 
 > Actualmente el proyecto se encuentra en una versión inicial funcional, enfocada en practicar React, TypeScript, componentes reutilizables, manejo de estado y persistencia local.
 

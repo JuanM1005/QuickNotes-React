@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/Button';
 import styles from './AppContent.styles';
 
 export const AppContent = () => {
-  const { noteToDelete, confirmDeleteNote, cancelDeleteNote } = useNotes();
+  const { notes, noteToDelete, confirmDeleteNote, cancelDeleteNote } = useNotes();
   const {
     searchQuery,
     activeFilter,
@@ -19,7 +19,7 @@ export const AppContent = () => {
   } = useNotesFilter();
 
   const handleViewAllNotes = (): void => {
-    alert('Próximamente...');
+    alert('Próximamente podrás ver y gestionar todas tus notas desde una vista dedicada.');
   };
 
   return (
@@ -46,7 +46,27 @@ export const AppContent = () => {
         </Button>
       </div>
 
-      <NoteList notes={filteredNotes} />
+      {filteredNotes.length > 0 ? (
+        <NoteList notes={filteredNotes} />
+      ) : notes.length === 0 ? (
+        <div className={styles.emptyState}>
+          <h2 className={styles.emptyStateTitle}>No hay notas todavía</h2>
+
+          <p className={styles.emptyStateDescription}>
+            Crea tu primera nota para comenzar a organizar tus ideas, apuntes y
+            recordatorios.
+          </p>
+        </div>
+      ) : (
+        <div className={styles.emptyState}>
+          <h2 className={styles.emptyStateTitle}>Sin resultados</h2>
+
+          <p className={styles.emptyStateDescription}>
+            Ninguna nota coincide con tu búsqueda. Intenta con otras palabras o
+            cambia el filtro activo.
+          </p>
+        </div>
+      )}
 
       <ConfirmDialog
         isOpen={noteToDelete !== null}
