@@ -10,7 +10,7 @@ export const SidebarNav = () => {
 
   const handleClick = (id: SidebarItemId, label: string): void => {
     setActiveId(id);
-    toast(`Proximamente la sección: "${label}"`);
+    toast(`Disponible próximamente la sección: "${label}"`);
   };
 
   return (
