@@ -8,7 +8,7 @@ export const colorOptionStyles: Record<NoteColor, string> = {
   pink: 'bg-pink-200 hover:bg-pink-300 ring-pink-400',
   purple: 'bg-purple-200 hover:bg-purple-300 ring-purple-400',
   red: 'bg-red-200 hover:bg-red-300 ring-red-400',
-  orange: 'bg-orange-200 hover:bg-orange-300 ring-orange-400'
+  orange: 'bg-orange-200 hover:bg-orange-300 ring-orange-400',
 };
 
 const styles = {
