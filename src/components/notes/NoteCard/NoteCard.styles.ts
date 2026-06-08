@@ -15,6 +15,9 @@ export const categoryBadgeStyles: Record<NoteCategory, string> = {
   work: 'bg-blue-100 text-blue-600',
   personal: 'bg-emerald-100 text-emerald-600',
   ideas: 'bg-yellow-100 text-yellow-600',
+  study: 'bg-indigo-100 text-indigo-600',
+  tasks: 'bg-orange-100 text-orange-600',
+  reminders: 'bg-pink-100 text-pink-600',
 };
 
 const styles = {

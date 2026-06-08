@@ -24,6 +24,9 @@ const AVAILABLE_CATEGORIES: { label: string; value: NoteCategory }[] = [
   { label: 'Trabajo', value: 'work' },
   { label: 'Personal', value: 'personal' },
   { label: 'Ideas', value: 'ideas' },
+  { label: 'Estudio', value: 'study' },
+  { label: 'Tareas', value: 'tasks' },
+  { label: 'Recordatorios', value: 'reminders' },
 ];
 
 export const NoteForm = ({ onSubmit, onCancel }: NoteFormProps) => {

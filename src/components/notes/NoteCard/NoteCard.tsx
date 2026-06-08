@@ -1,6 +1,14 @@
 import clsx from 'clsx';
 import { FaRegTrashAlt, FaRegStar, FaStar } from 'react-icons/fa';
-import { LuFileText, LuBriefcase, LuUser, LuLightbulb } from 'react-icons/lu';
+import {
+  LuFileText,
+  LuBriefcase,
+  LuUser,
+  LuLightbulb,
+  LuBookOpen,
+  LuClipboardList,
+  LuBell,
+} from 'react-icons/lu';
 import type { IconType } from 'react-icons';
 
 import { formatDate } from '@/utils/formatDate.utils';
@@ -16,12 +24,18 @@ const CATEGORY_LABELS: Record<NoteCategory, string> = {
   work: 'Trabajo',
   personal: 'Personal',
   ideas: 'Ideas',
+  study: 'Estudio',
+  tasks: 'Tareas',
+  reminders: 'Recordatorios',
 };
 
 const CATEGORY_ICONS: Record<NoteCategory, IconType> = {
   work: LuBriefcase,
   personal: LuUser,
   ideas: LuLightbulb,
+  study: LuBookOpen,
+  tasks: LuClipboardList,
+  reminders: LuBell,
 };
 
 export const NoteCard = ({ note }: NoteCardProps) => {

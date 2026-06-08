@@ -6,7 +6,13 @@ export type NoteColor =
   | 'purple'
   | 'red'
   | 'orange';
-export type NoteCategory = 'work' | 'personal' | 'ideas';
+export type NoteCategory =
+  | 'work'
+  | 'personal'
+  | 'ideas'
+  | 'study'
+  | 'tasks'
+  | 'reminders';
 export type NoteFilter = 'all' | NoteCategory;
 export type NoteIcon =
   | 'book'
