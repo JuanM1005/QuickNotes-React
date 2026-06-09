@@ -1,20 +1,23 @@
-import { PageHeader } from '@/components/layout/PageHeader';
+// import { PageHeader } from '@/components/layout/PageHeader';
 import { PageLayout } from '@/components/layout/PageLayout';
-import { NoteList } from '@/components/notes/NoteList';
-import { NotesEmptyState } from '@/components/notes/NotesEmptyState/NotesEmptyState';
-import { APP_IMAGES } from '@/constants';
-import { useNotesFilter } from '@/hooks/useNotesFilter';
-import { MdArchive } from 'react-icons/md';
-import styles from './ArchivedPage.styles';
+// import { NoteList } from '@/components/notes/NoteList';
+// import { NotesEmptyState } from '@/components/notes/NotesEmptyState/NotesEmptyState';
+// import { APP_IMAGES } from '@/constants';
+// import { useNotesFilter } from '@/hooks/useNotesFilter';
+// import { MdArchive } from 'react-icons/md';
+// import styles from './ArchivedPage.styles';
+import { ComingSoonState } from '../../components/feedback/ComingSoonState/ComingSoonState';
 
 export const ArchivedPage = () => {
-  const allArchived = useNotesFilter('archived');
-  const searchQuery = ''; // TODO: conectar con búsqueda
-  const filteredArchived = allArchived;
+  // const allArchived = useNotesFilter('archived');
+  // const searchQuery = ''; // TODO: conectar con búsqueda
+  // const filteredArchived = allArchived;
 
   return (
     <PageLayout>
-      {filteredArchived.length > 0 ? (
+
+      <ComingSoonState title='Sección de notas archivadas' />
+      {/* {filteredArchived.length > 0 ? (
         <>
           <PageHeader
             title="Archivadas"
@@ -50,7 +53,7 @@ export const ArchivedPage = () => {
             />
           )}
         </>
-      )}
+      )} */}
     </PageLayout>
   );
 };
