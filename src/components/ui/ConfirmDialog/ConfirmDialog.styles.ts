@@ -1,6 +1,7 @@
 import type { ConfirmDialogVariant } from './ConfirmDialog.types';
 
 export const iconStyles: Record<ConfirmDialogVariant, string> = {
+  caution: 'bg-amber-50 text-amber-600',
   danger: 'bg-red-50 text-red-600',
   default: 'bg-blue-50 text-blue-600',
 };

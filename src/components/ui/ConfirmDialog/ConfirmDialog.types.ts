@@ -1,4 +1,4 @@
-export type ConfirmDialogVariant = 'danger' | 'default';
+export type ConfirmDialogVariant = 'caution' | 'danger' | 'default';
 
 export interface ConfirmDialogProps {
   isOpen: boolean;

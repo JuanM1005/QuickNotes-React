@@ -6,6 +6,7 @@ const styles = {
     secondary: 'border-slate-200 bg-white text-slate-900 hover:bg-slate-100',
     selected:
       'border-slate-900 bg-slate-900 text-white hover:border-slate-800 hover:bg-slate-800 active:bg-slate-950',
+    caution: 'border-slate-200 bg-amber-600 text-white hover:bg-amber-700',
     danger: 'border-slate-200 bg-red-600 text-white hover:bg-red-700',
     unstyled: '',
   },

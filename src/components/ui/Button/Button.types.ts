@@ -4,6 +4,7 @@ type ButtonVariant =
   | 'primary'
   | 'secondary'
   | 'selected'
+  | 'caution'
   | 'danger'
   | 'unstyled';
 

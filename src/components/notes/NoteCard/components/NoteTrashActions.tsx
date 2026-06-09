@@ -8,7 +8,7 @@ interface NoteTrashActionsProps {
 }
 
 export const NoteTrashActions = ({ noteId }: NoteTrashActionsProps) => {
-  const { restoreNote, permanentlyDeleteNote } = useNotes();
+  const { restoreNote, requestPermanentlyDeleteNote } = useNotes();
 
   return (
     <div className={actionStyles.btnContainer}>
@@ -23,7 +23,7 @@ export const NoteTrashActions = ({ noteId }: NoteTrashActionsProps) => {
 
       <Button
         variant="unstyled"
-        onClick={() => permanentlyDeleteNote(noteId)}
+        onClick={() => requestPermanentlyDeleteNote(noteId)}
         className={actionStyles.deleteBtn}
       >
         <FaTrash size={14} />

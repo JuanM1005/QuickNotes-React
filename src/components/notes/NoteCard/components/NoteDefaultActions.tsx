@@ -1,4 +1,4 @@
-import { FaRegStar, FaStar, FaRegTrashAlt } from 'react-icons/fa';
+import { FaRegStar, FaStar, FaTrash } from 'react-icons/fa';
 import { Button } from '@/components/ui/Button';
 import { useNotes } from '@/context/notes';
 import actionStyles from './NoteActions.styles';
@@ -28,9 +28,10 @@ export const NoteDefaultActions = ({
       <Button
         variant="unstyled"
         onClick={() => requestDeleteNote(noteId)}
-        className={actionStyles.deleteBtn}
+        aria-label={isFavorite ? 'Mover a papelera' : 'Mover a papelera'}
+        className={actionStyles.paperBtn}
       >
-        <FaRegTrashAlt size={18} />
+        <FaTrash size={14} />
       </Button>
     </>
   );

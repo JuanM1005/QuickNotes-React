@@ -9,11 +9,14 @@ import type { Note, NoteInput } from '@/types/note.types';
 export interface NotesContextValue {
   notes: Note[];
   noteToDelete: Note | null;
+  noteToPermanentlyDelete: Note | null;
   addNote: (input: NoteInput) => void;
   toggleFavorite: (id: string) => void;
   requestDeleteNote: (id: string) => void;
   confirmDeleteNote: () => void;
   cancelDeleteNote: () => void;
   restoreNote: (id: string) => void;
-  permanentlyDeleteNote: (id: string) => void;
+  requestPermanentlyDeleteNote: (id: string) => void;
+  confirmPermanentlyDeleteNote: () => void;
+  cancelPermanentlyDeleteNote: () => void;
 }

@@ -14,6 +14,7 @@ export const NotesProvider = ({ children }: NotesProviderProps) => {
   // Se guarda el objeto completo (no solo el id) porque el ConfirmDialog
   // necesita el título de la nota para mostrarlo en el mensaje de confirmación.
   const [noteToDelete, setNoteToDelete] = useState<Note | null>(null);
+  const [noteToPermanentlyDelete, setNoteToPermanentlyDelete] = useState<Note | null>(null);
 
   useEffect(() => {
     saveNotes(notes);
@@ -34,7 +35,6 @@ export const NotesProvider = ({ children }: NotesProviderProps) => {
         note.id === id ? { ...note, isFavorite: !note.isFavorite } : note,
       ),
     );
-    toast.success('Nota marcada como favorita'); // Solo de prueba, un toast al marcar/desmarcar se vuelve demasiado ruido en la UX
   };
 
   // Borrado en 2 pasos: primero se registra la nota a eliminar (abre el diálogo),
@@ -64,12 +64,22 @@ export const NotesProvider = ({ children }: NotesProviderProps) => {
     toast.success('Nota restaurada correctamente.', { duration: 3000 });
   };
 
-  const permanentlyDeleteNote = (id: string): void => {
-    setNotes((prev) => prev.filter((note) => note.id !== id));
+  const requestPermanentlyDeleteNote = (id: string): void => {
+    const note = notes.find((note) => note.id === id);
+    if (note) setNoteToPermanentlyDelete(note);
+  };
+
+  const confirmPermanentlyDeleteNote = (): void => {
+    if (!noteToPermanentlyDelete) return;
+    setNotes((prev) => prev.filter((note) => note.id !== noteToPermanentlyDelete.id));
+    setNoteToPermanentlyDelete(null);
     toast.success('Nota eliminada definitivamente.', { duration: 3000 });
   };
 
-  // Solo limpia noteToDelete para cerrar el diálogo sin modificar
+  const cancelPermanentlyDeleteNote = (): void => {
+    setNoteToPermanentlyDelete(null);
+  };
+
   const cancelDeleteNote = (): void => {
     setNoteToDelete(null);
   };
@@ -79,13 +89,16 @@ export const NotesProvider = ({ children }: NotesProviderProps) => {
       value={{
         notes,
         noteToDelete,
+        noteToPermanentlyDelete,
         addNote,
         toggleFavorite,
         requestDeleteNote,
         confirmDeleteNote,
         cancelDeleteNote,
         restoreNote,
-        permanentlyDeleteNote,
+        requestPermanentlyDeleteNote,
+        confirmPermanentlyDeleteNote,
+        cancelPermanentlyDeleteNote,
       }}
     >
       {children}
