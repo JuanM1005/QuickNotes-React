@@ -8,6 +8,7 @@ import { FavoritesPage } from '@/pages/FavoritesPage/FavoritesPage';
 import { TrashPage } from '@/pages/TrashPage';
 import { Toaster } from 'react-hot-toast';
 import styles from './App.styles';
+import { ArchivedPage } from '@/pages/ArchivedPage/ArchivedPage';
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const AppContent = () => {
 
       {activePage === 'notes' && <NotesPage />}
       {activePage === 'favorites' && <FavoritesPage />}
+      {activePage === 'archived' && <ArchivedPage/>}
       {activePage === 'trash' && <TrashPage />}
 
       <MobileNav />
