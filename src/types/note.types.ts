@@ -35,7 +35,6 @@ export interface Note {
   color?: NoteColor;
   category?: NoteCategory;
   icon?: NoteIcon;
-  isFavorite: boolean;
 }
 
 export type NoteInput = Omit<Note, 'id' | 'createdAt' | 'updatedAt'>;
