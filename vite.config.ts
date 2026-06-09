@@ -15,6 +15,9 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
+      workbox: {
+        cleanupOutdatedCaches: true
+      },
       manifest: {
         name: 'QuickNotes',
         short_name: 'QuickNotes',
