@@ -35,7 +35,9 @@ export const NoteForm = ({ onSubmit, onCancel }: NoteFormProps) => {
           id="note-title"
           type="text"
           value={title}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setTitle(e.target.value)
+          }
           placeholder="Escribe el titulo de tu nota"
           autoFocus
         />

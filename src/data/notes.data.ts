@@ -10,6 +10,9 @@ export const NOTES: Note[] = [
     color: 'blue',
     category: 'work',
     icon: 'book',
+    isFavorite: true,
+    isArchived: false,
+    isDeleted: false,
   },
   {
     id: '2',
@@ -20,6 +23,9 @@ export const NOTES: Note[] = [
     color: 'yellow',
     category: 'ideas',
     icon: 'lightbulb',
+    isFavorite: false,
+    isArchived: false,
+    isDeleted: false,
   },
   {
     id: '3',
@@ -30,6 +36,9 @@ export const NOTES: Note[] = [
     color: 'pink',
     category: 'personal',
     icon: 'heart',
+    isFavorite: true,
+    isArchived: false,
+    isDeleted: false,
   },
   {
     id: '4',
@@ -40,6 +49,9 @@ export const NOTES: Note[] = [
     color: 'green',
     category: 'work',
     icon: 'code',
+    isFavorite: false,
+    isArchived: true,
+    isDeleted: false,
   },
   {
     id: '5',
@@ -50,6 +62,9 @@ export const NOTES: Note[] = [
     color: 'purple',
     category: 'ideas',
     icon: 'flag',
+    isFavorite: true,
+    isArchived: false,
+    isDeleted: false,
   },
   {
     id: '6',
@@ -60,6 +75,9 @@ export const NOTES: Note[] = [
     color: 'orange',
     category: 'personal',
     icon: 'shopping',
+    isFavorite: false,
+    isArchived: false,
+    isDeleted: true,
   },
   {
     id: '7',
@@ -71,6 +89,9 @@ export const NOTES: Note[] = [
     color: 'blue',
     category: 'work',
     icon: 'briefcase',
+    isFavorite: true,
+    isArchived: false,
+    isDeleted: false,
   },
   {
     id: '8',
@@ -81,6 +102,9 @@ export const NOTES: Note[] = [
     color: 'red',
     category: 'ideas',
     icon: 'star',
+    isFavorite: false,
+    isArchived: true,
+    isDeleted: false,
   },
   {
     id: '9',
@@ -91,5 +115,8 @@ export const NOTES: Note[] = [
     color: 'yellow',
     category: 'personal',
     icon: 'home',
+    isFavorite: true,
+    isArchived: false,
+    isDeleted: true,
   },
 ];

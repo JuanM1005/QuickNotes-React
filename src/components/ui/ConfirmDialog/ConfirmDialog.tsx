@@ -11,6 +11,8 @@ export const ConfirmDialog = ({
   title,
   description,
   variant = 'default',
+  confirmText = 'Confirmar',
+  cancelText = 'Cancelar',
   onConfirm,
   onCancel,
 }: ConfirmDialogProps) => {
@@ -34,13 +36,13 @@ export const ConfirmDialog = ({
 
       <div className={styles.actions}>
         <Button variant="secondary" onClick={onCancel}>
-          Cancelar
+          {cancelText}
         </Button>
         <Button
           variant={variant === 'danger' ? 'danger' : 'primary'}
           onClick={onConfirm}
         >
-          Eliminar
+          {confirmText}
         </Button>
       </div>
     </Modal>

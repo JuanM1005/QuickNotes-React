@@ -13,7 +13,7 @@ export const SidebarFooter = ({ onOpenForm }: SidebarFooterProps) => {
   const { isCollapsed } = useSidebar();
 
   const handleLogout = (): void => {
-    toast('Módulo cerrar sesión proximamente!');
+    toast('Módulo de autenticación + cerrar sesión proximamente!');
   };
 
   return (

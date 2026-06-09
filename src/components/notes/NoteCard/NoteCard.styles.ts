@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import type { NoteCategory, NoteColor } from '@/types/note.types';
 
 export const iconBoxStyles: Record<NoteColor, string> = {
@@ -38,15 +37,6 @@ const styles = {
 
   actions:
     'flex shrink-0 flex-col items-center justify-between self-stretch py-0.5',
-  favoriteBtn: (selected: boolean) =>
-    clsx(
-      'cursor-pointer rounded-lg p-1 transition-colors',
-      selected
-        ? 'text-amber-400 hover:text-amber-500'
-        : 'text-slate-300 hover:text-amber-400',
-    ),
-  deleteBtn:
-    'cursor-pointer text-red-500 transition-all duration-200 ease-in-out hover:scale-110',
 };
 
 export default styles;

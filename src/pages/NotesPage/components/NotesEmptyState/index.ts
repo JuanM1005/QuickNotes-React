@@ -1,1 +1,0 @@
-export { NotesEmptyState } from './NotesEmptyState';
