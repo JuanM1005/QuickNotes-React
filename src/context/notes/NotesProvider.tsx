@@ -19,24 +19,54 @@ export const NotesProvider = ({ children }: NotesProviderProps) => {
     saveNotes(notes);
   }, [notes]);
 
-  const handleAddNote = (input: NoteInput): void => {
+  const addNote = (input: NoteInput): void => {
     const newNote = createNote(input);
     setNotes((prev) => [newNote, ...prev]);
     toast.success('Nota agregada correctamente.', { duration: 3000 });
   };
 
+  // Alterna el campo isFavorite de la nota indicada.
+  // Notas sin el campo (undefined) se vuelven favoritas en el primer click
+  // gracias a la coerción !undefined === true.
+  const toggleFavorite = (id: string) => {
+    setNotes((prev) =>
+      prev.map((note) =>
+        note.id === id ? { ...note, isFavorite: !note.isFavorite } : note,
+      ),
+    );
+    toast.success('Nota marcada como favorita'); // Solo de prueba, un toast al marcar/desmarcar se vuelve demasiado ruido en la UX
+  };
+
   // Borrado en 2 pasos: primero se registra la nota a eliminar (abre el diálogo),
   // luego el usuario confirma o cancela.
   const requestDeleteNote = (id: string): void => {
-    const note = notes.find((n) => n.id === id); // Busca la nota por su id y la guarda en noteToDelete
+    const note = notes.find((note) => note.id === id); // Busca la nota por su id y la guarda en noteToDelete
     if (note) setNoteToDelete(note);
   };
 
   const confirmDeleteNote = (): void => {
-    if (!noteToDelete) return; // Si no hay nota a eliminar no se ejecuta la función
-    setNotes((prev) => prev.filter((n) => n.id !== noteToDelete.id)); // Se elimina del estado
-    setNoteToDelete(null); // Después se limpia noteToDelete para cerrar el diálogo.
-    toast.success('Nota eliminada correctamente.', { duration: 3000 });
+    if (!noteToDelete) return;
+    setNotes((prev) =>
+      prev.map((note) =>
+        note.id === noteToDelete.id ? { ...note, isDeleted: true } : note,
+      ),
+    );
+    setNoteToDelete(null);
+    toast.success('Nota movida a la papelera.', { duration: 3000 });
+  };
+
+  const restoreNote = (id: string): void => {
+    setNotes((prev) =>
+      prev.map((note) =>
+        note.id === id ? { ...note, isDeleted: false } : note,
+      ),
+    );
+    toast.success('Nota restaurada correctamente.', { duration: 3000 });
+  };
+
+  const permanentlyDeleteNote = (id: string): void => {
+    setNotes((prev) => prev.filter((note) => note.id !== id));
+    toast.success('Nota eliminada definitivamente.', { duration: 3000 });
   };
 
   // Solo limpia noteToDelete para cerrar el diálogo sin modificar
@@ -49,10 +79,13 @@ export const NotesProvider = ({ children }: NotesProviderProps) => {
       value={{
         notes,
         noteToDelete,
-        handleAddNote,
+        addNote,
+        toggleFavorite,
         requestDeleteNote,
         confirmDeleteNote,
         cancelDeleteNote,
+        restoreNote,
+        permanentlyDeleteNote,
       }}
     >
       {children}

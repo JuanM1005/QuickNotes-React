@@ -5,6 +5,8 @@ export interface ConfirmDialogProps {
   title: string;
   description?: string;
   variant?: ConfirmDialogVariant;
+  confirmText?: string;
+  cancelText?: string;
   onConfirm: () => void;
   onCancel: () => void;
 }

@@ -4,7 +4,7 @@ import type { NoteInput } from '@/types/note.types';
 
 export const useNoteModal = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { handleAddNote } = useNotes();
+  const { addNote: handleAddNote } = useNotes();
 
   const open = (): void => setIsOpen(true);
   const close = (): void => setIsOpen(false);

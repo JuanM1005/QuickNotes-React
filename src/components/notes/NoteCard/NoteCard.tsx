@@ -1,30 +1,19 @@
 import clsx from 'clsx';
-import { FaRegTrashAlt, FaRegStar, FaStar } from 'react-icons/fa';
 import { LuFileText } from 'react-icons/lu';
-import { useState } from 'react';
-
 import { formatDate } from '@/utils/formatDate.utils';
-import { useNotes } from '@/context/notes';
 import type { NoteCardProps } from './NoteCard.types';
 import { NOTE_ICONS } from '@/data/noteIcons.data';
-import { Button } from '@/components/ui/Button';
 import styles, { iconBoxStyles } from './NoteCard.styles';
 import { NoteCategoryBadge } from './components/NoteCategoryBadge';
-import toast from 'react-hot-toast';
+import { NoteDefaultActions } from './components/NoteDefaultActions';
+import { NoteFavoritesActions } from './components/NoteFavoritesActions';
+import { NoteTrashActions } from './components/NoteTrashActions';
 
-export const NoteCard = ({ note }: NoteCardProps) => {
-  const { requestDeleteNote } = useNotes();
-  const [selected, setSelected] = useState<boolean>(false);
-
-  const iconBoxClass = note.color ? iconBoxStyles[note.color] : styles.iconBoxDefault;
+export const NoteCard = ({ note, variant = 'default' }: NoteCardProps) => {
+  const iconBoxClass = note.color
+    ? iconBoxStyles[note.color]
+    : styles.iconBoxDefault;
   const NoteIcon = note.icon ? NOTE_ICONS[note.icon] : LuFileText;
-
-  const handleFavoriteClick = (): void => {
-    toast('Favoritos próximamente, por el momento solo visualización del estado del botón.');
-    setSelected((prev) => !prev);
-  };
-
-  const handleDeleteClick = (): void => requestDeleteNote(note.id);
 
   return (
     <article className={styles.card}>
@@ -44,21 +33,19 @@ export const NoteCard = ({ note }: NoteCardProps) => {
       </div>
 
       <div className={styles.actions}>
-        <Button
-          variant="unstyled"
-          onClick={handleFavoriteClick}
-          className={styles.favoriteBtn(selected)}
-        >
-          {selected ? <FaStar size={16} /> : <FaRegStar size={16} />}
-        </Button>
-
-        <Button
-          variant="unstyled"
-          onClick={handleDeleteClick}
-          className={styles.deleteBtn}
-        >
-          <FaRegTrashAlt size={18} />
-        </Button>
+        {variant === 'trash' && <NoteTrashActions noteId={note.id} />}
+        {variant === 'favorites' && (
+          <NoteFavoritesActions
+            noteId={note.id}
+            isFavorite={note.isFavorite ?? false}
+          />
+        )}
+        {(variant === 'default' || variant === 'archived' || !variant) && (
+          <NoteDefaultActions
+            noteId={note.id}
+            isFavorite={note.isFavorite ?? false}
+          />
+        )}
       </div>
     </article>
   );

@@ -13,7 +13,9 @@ export type NoteCategory =
   | 'study'
   | 'tasks'
   | 'reminders';
-export type NoteFilter = 'all' | NoteCategory;
+
+export type NoteFilter = 'all' | 'favorites' | NoteCategory;
+
 export type NoteIcon =
   | 'book'
   | 'lightbulb'
@@ -26,6 +28,8 @@ export type NoteIcon =
   | 'home'
   | 'shopping';
 
+export type NoteStatus = 'favorites' | 'archived' | 'deleted';
+
 export interface Note {
   id: string;
   title: string;
@@ -35,6 +39,12 @@ export interface Note {
   color?: NoteColor;
   category?: NoteCategory;
   icon?: NoteIcon;
+  isFavorite?: boolean;
+  isArchived?: boolean;
+  isDeleted?: boolean;
 }
 
-export type NoteInput = Omit<Note, 'id' | 'createdAt' | 'updatedAt'>;
+export type NoteInput = Omit<
+  Note,
+  'id' | 'createdAt' | 'updatedAt' | 'isFavorite' | 'isArchived' | 'isDeleted'
+>;

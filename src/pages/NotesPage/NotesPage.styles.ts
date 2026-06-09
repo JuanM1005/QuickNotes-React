@@ -5,8 +5,6 @@ const styles = {
 
   viewAllBtn:
     'flex cursor-pointer items-center gap-1 text-sm font-semibold text-blue-600 transition-colors hover:text-blue-700',
-
-
 };
 
 export default styles;

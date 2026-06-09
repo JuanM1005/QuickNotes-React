@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { useNotes } from '@/context/notes';
 import type { Note, NoteFilter } from '@/types/note.types';
 
-export const useNotesFilter = () => {
+export const useNotesSearch = () => {
   const { notes } = useNotes();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeFilter, setActiveFilter] = useState<NoteFilter>('all');
@@ -11,6 +11,8 @@ export const useNotesFilter = () => {
     return (
       notes
         .filter((note) => {
+          if (note.isDeleted || note.isArchived) return false;
+
           const matchesCategory =
             activeFilter === 'all' || note.category === activeFilter;
 
