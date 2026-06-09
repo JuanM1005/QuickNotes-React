@@ -1,7 +1,11 @@
 import type { ChangeEvent } from 'react';
 import clsx from 'clsx';
 
-import { type NoteFormProps, AVAILABLE_CATEGORIES, AVAILABLE_COLORS } from './NoteForm.types';
+import {
+  type NoteFormProps,
+  AVAILABLE_CATEGORIES,
+  AVAILABLE_COLORS,
+} from './NoteForm.types';
 import { NOTE_ICONS, NOTE_ICON_KEYS } from '@/data/noteIcons.data';
 import { Button } from '@/components/ui/Button';
 import { FormField } from '@/components/ui/FormField';
