@@ -4,61 +4,55 @@
 import { PageLayout } from '@/components/layout/PageLayout';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { NoteList } from '@/components/notes/NoteList';
-import { EmptyState } from '@/components/ui/EmptyState';
 import { useNotesFilter } from '@/hooks/useNotesFilter';
 import { APP_IMAGES } from '@/constants';
-// import styles from './FavoritesPage.styles';
+import { NotesEmptyState } from '@/components/notes/NotesEmptyState/NotesEmptyState';
+import { MdStars } from 'react-icons/md';
+import styles from './FavoritesPage.styles';
 
 export const FavoritesPage = () => {
   const allFavorites = useNotesFilter('favorites');
-  // const [searchQuery, setSearchQuery] = useState('');
-
-  // const favorites = useMemo(() => {
-  //   const query = searchQuery.trim().toLowerCase();
-  //   if (!query) return allFavorites;
-  //   return allFavorites.filter(
-  //     (n) =>
-  //       n.title.toLowerCase().includes(query) ||
-  //       n.content.toLowerCase().includes(query),
-  //   );
-  // }, [allFavorites, searchQuery]);
+  const searchQuery = ''; // TODO: conectar con búsqueda
+  const filteredFavorites = allFavorites;
 
   return (
     <PageLayout>
-      <PageHeader
-        title="Favoritos"
-        description="Tus notas destacadas en un solo lugar"
-        image={APP_IMAGES.Icons.favorites}
-        imageAlt="Favoritos"
-      />
-      {/* 
-      <div className={styles.searchWrapper}>
-        <label htmlFor="search-favorites" className="sr-only">
-          Buscar favoritos
-        </label>
-        <FaSearch className={styles.searchIcon} size={14} />
-        <input
-          id="search-favorites"
-          type="text"
-          placeholder="Buscar en favoritos..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className={styles.searchInput}
-        />
-      </div> */}
+      {filteredFavorites.length > 0 ? (
+        <>
+          <PageHeader
+            title="Favoritos"
+            description="Tus notas destacadas en un solo lugar"
+            image={APP_IMAGES.Icons.favorites}
+            imageAlt="Favoritos"
+          />
 
-      {allFavorites.length > 0 ? (
-        <NoteList notes={allFavorites} variant="favorites" />
-      ) : allFavorites.length === 0 ? (
-        <EmptyState
-          title="Sin favoritos aún"
-          description="Marca una nota con ⭐ para verla aquí."
-        />
+          <NoteList notes={filteredFavorites} variant="favorites" />
+        </>
       ) : (
-        <EmptyState
-          title="Sin resultados"
-          description="Ningún favorito coincide con tu búsqueda."
-        />
+        <>
+          <div className={styles.simpleHeader}>
+            <span className={styles.simpleHeaderAccent} />
+            <h2 className={styles.simpleHeaderTitle}>Favoritos</h2>
+          </div>
+
+          {searchQuery ? (
+            <NotesEmptyState
+              imageSrc={APP_IMAGES.Icons.notFound}
+              imageAlt="No encontrado"
+              title="Sin resultados"
+              description="Ningún favorito coincide con tu búsqueda."
+            />
+          ) : (
+            <NotesEmptyState
+              imageSrc={APP_IMAGES.Icons.favoritesNone}
+              imageAlt="Sin favoritos"
+              title="No hay notas favoritas"
+              description="Las notas que marques como favoritas apareceran aquí para que puedas encontrarlas rápidamente."
+              tipIcon={MdStars}
+              tipText="Toca el ícono de estrella en cualquier nota para agregarla a favoritos."
+            />
+          )}
+        </>
       )}
     </PageLayout>
   );
