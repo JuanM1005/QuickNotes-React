@@ -31,7 +31,7 @@ const AppContent = () => {
 
       {activePage === 'notes' && <NotesPage />}
       {activePage === 'favorites' && <FavoritesPage />}
-      {activePage === 'archived' && <ArchivedPage/>}
+      {activePage === 'archived' && <ArchivedPage />}
       {activePage === 'trash' && <TrashPage />}
 
       <MobileNav />

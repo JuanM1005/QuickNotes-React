@@ -23,8 +23,7 @@ const styles = {
   title:
     'max-w-xl text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl',
 
-  description:
-    'mt-4 max-w-xl text-sm leading-7 text-slate-500 sm:text-base',
+  description: 'mt-4 max-w-xl text-sm leading-7 text-slate-500 sm:text-base',
 };
 
 export default styles;

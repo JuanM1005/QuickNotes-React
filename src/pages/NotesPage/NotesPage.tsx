@@ -58,7 +58,7 @@ export const NotesPage = () => {
       </div>
 
       {filteredNotes.length > 0 ? (
-        <NoteList notes={filteredNotes} variant='default'/>
+        <NoteList notes={filteredNotes} variant="default" />
       ) : notes.length === 0 ? (
         <EmptyState
           title="No hay notas todavía"

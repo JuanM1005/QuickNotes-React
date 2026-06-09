@@ -14,7 +14,8 @@ export const NotesProvider = ({ children }: NotesProviderProps) => {
   // Se guarda el objeto completo (no solo el id) porque el ConfirmDialog
   // necesita el título de la nota para mostrarlo en el mensaje de confirmación.
   const [noteToDelete, setNoteToDelete] = useState<Note | null>(null);
-  const [noteToPermanentlyDelete, setNoteToPermanentlyDelete] = useState<Note | null>(null);
+  const [noteToPermanentlyDelete, setNoteToPermanentlyDelete] =
+    useState<Note | null>(null);
 
   useEffect(() => {
     saveNotes(notes);
@@ -71,7 +72,9 @@ export const NotesProvider = ({ children }: NotesProviderProps) => {
 
   const confirmPermanentlyDeleteNote = (): void => {
     if (!noteToPermanentlyDelete) return;
-    setNotes((prev) => prev.filter((note) => note.id !== noteToPermanentlyDelete.id));
+    setNotes((prev) =>
+      prev.filter((note) => note.id !== noteToPermanentlyDelete.id),
+    );
     setNoteToPermanentlyDelete(null);
     toast.success('Nota eliminada definitivamente.', { duration: 3000 });
   };
