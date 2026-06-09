@@ -14,7 +14,7 @@ const styles = {
   description:
     'mt-3 max-w-xs text-base leading-7 text-slate-600 sm:max-w-xl sm:text-lg',
 
-  logo: 'absolute right-0 top-8 size-32 opacity-80 drop-shadow-xl sm:static sm:size-28 sm:opacity-100 md:size-36',
+  image: 'absolute right-0 top-8 size-32 opacity-80 drop-shadow-xl sm:static sm:size-28 sm:opacity-100 md:size-36',
 };
 
 export default styles;

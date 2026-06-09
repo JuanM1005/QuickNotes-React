@@ -1,18 +1,15 @@
 import type { ChangeEvent } from 'react';
-import clsx from 'clsx';
 
-import {
-  type NoteFormProps,
-  AVAILABLE_CATEGORIES,
-  AVAILABLE_COLORS,
-} from './NoteForm.types';
-import { NOTE_ICONS, NOTE_ICON_KEYS } from '@/data/noteIcons.data';
+import { type NoteFormProps } from './NoteForm.types';
 import { Button } from '@/components/ui/Button';
 import { FormField } from '@/components/ui/FormField';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
-import styles, { colorOptionStyles } from './NoteForm.styles';
+import styles from './NoteForm.styles';
 import { useNoteForm } from './hooks/useNoteForm';
+import { NoteCategoryPicker } from './components/NoteCategoryPicker';
+import { NoteIconPicker } from './components/NoteIconPicker';
+import { NoteColorPicker } from './components/NoteColorPicker';
 
 export const NoteForm = ({ onSubmit, onCancel }: NoteFormProps) => {
   const {
@@ -33,14 +30,12 @@ export const NoteForm = ({ onSubmit, onCancel }: NoteFormProps) => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <FormField label="Titulo" htmlFor="note-tile">
+      <FormField label="Titulo" htmlFor="note-title">
         <Input
           id="note-title"
           type="text"
           value={title}
-          onChange={(e: ChangeEvent<HTMLInputElement>): void =>
-            setTitle(e.target.value)
-          }
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
           placeholder="Escribe el titulo de tu nota"
           autoFocus
         />
@@ -55,7 +50,7 @@ export const NoteForm = ({ onSubmit, onCancel }: NoteFormProps) => {
         <Textarea
           id="note-content"
           value={content}
-          onChange={(e: ChangeEvent<HTMLTextAreaElement>): void =>
+          onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
             setContent(e.target.value)
           }
           placeholder="Escribe el contenido de tu nota..."
@@ -63,82 +58,16 @@ export const NoteForm = ({ onSubmit, onCancel }: NoteFormProps) => {
         />
       </FormField>
 
-      <FormField label="Categoría" htmlFor="note-category">
-        <div className={styles.categoryList} id="note-category">
-          {AVAILABLE_CATEGORIES.map(({ label, value }) => (
-            <button
-              key={value}
-              type="button"
-              onClick={() =>
-                setCategory(value === category ? undefined : value)
-              }
-              className={styles.categoryBtn(category === value)}
-            >
-              {label}
-            </button>
-          ))}
-          <button
-            type="button"
-            onClick={() => setCategory(undefined)}
-            className={styles.noCategoryBtn(category === undefined)}
-          >
-            Sin categoría
-          </button>
-        </div>
+      <FormField label="Categoría">
+        <NoteCategoryPicker category={category} onChange={setCategory} />
       </FormField>
 
-      <FormField label="Ícono" htmlFor="note-icon">
-        <div className={styles.iconList} id="note-icon">
-          {NOTE_ICON_KEYS.map((key) => {
-            const Icon = NOTE_ICONS[key];
-            return (
-              <button
-                key={key}
-                type="button"
-                onClick={() => setIcon(key === icon ? undefined : key)}
-                aria-label={`Ícono ${key}`}
-                className={styles.iconBtn(icon === key)}
-              >
-                <Icon size={16} />
-              </button>
-            );
-          })}
-          <button
-            type="button"
-            onClick={() => setIcon(undefined)}
-            className={styles.noIconBtn(icon === undefined)}
-          >
-            Sin ícono
-          </button>
-        </div>
+      <FormField label="Ícono">
+        <NoteIconPicker icon={icon} onChange={setIcon} />
       </FormField>
 
-      <FormField label="Color" htmlFor="note-color">
-        <div className={styles.colorList} id="note-color">
-          {AVAILABLE_COLORS.map((c) => (
-            <button
-              key={c}
-              type="button"
-              onClick={(): void => setColor(c)}
-              aria-label={`Color ${c}`}
-              className={clsx(
-                styles.colorButton,
-                colorOptionStyles[c],
-                color === c && styles.colorButtonSelected,
-              )}
-            />
-          ))}
-          <button
-            type="button"
-            onClick={(): void => setColor(undefined)}
-            className={clsx(
-              styles.noColorButton,
-              color === undefined && styles.noColorButtonSelected,
-            )}
-          >
-            Sin color
-          </button>
-        </div>
+      <FormField label="Color">
+        <NoteColorPicker color={color} onChange={setColor} />
       </FormField>
 
       <div className={styles.actions}>

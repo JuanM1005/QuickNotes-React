@@ -1,11 +1,14 @@
 import { NoteList } from '@/components/notes/NoteList';
 import { useNotes } from '@/context/notes';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
-import { NotesHeader } from './components/NotesHeader';
+import { PageLayout } from '@/components/layout/PageLayout';
+import { PageHeader } from '@/components/layout/PageHeader';
 import { NotesToolbar } from './components/NotesToolbar';
+import { NotesEmptyState } from './components/NotesEmptyState';
 import { useNotesFilter } from './hooks/useNotesFilter';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { Button } from '@/components/ui/Button';
+import { APP_IMAGES } from '@/constants';
 import styles from './NotesPage.styles';
 import toast from 'react-hot-toast';
 
@@ -27,8 +30,14 @@ export const NotesPage = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <NotesHeader />
+    <PageLayout>
+      <PageHeader
+        eyebrow="Bienvenido/a de nuevo 👋"
+        title="QuickNotes"
+        description="Tus ideas, apuntes y recordatorios en un solo lugar."
+        image={APP_IMAGES.logo}
+        imageAlt="Logo de QuickNotes"
+      />
 
       <NotesToolbar
         searchQuery={searchQuery}
@@ -53,23 +62,15 @@ export const NotesPage = () => {
       {filteredNotes.length > 0 ? (
         <NoteList notes={filteredNotes} />
       ) : notes.length === 0 ? (
-        <div className={styles.emptyState}>
-          <h2 className={styles.emptyStateTitle}>No hay notas todavía</h2>
-
-          <p className={styles.emptyStateDescription}>
-            Crea tu primera nota para comenzar a organizar tus ideas, apuntes y
-            recordatorios.
-          </p>
-        </div>
+        <NotesEmptyState
+          title="No hay notas todavía"
+          description="Crea tu primera nota para comenzar a organizar tus ideas, apuntes y recordatorios."
+        />
       ) : (
-        <div className={styles.emptyState}>
-          <h2 className={styles.emptyStateTitle}>Sin resultados</h2>
-
-          <p className={styles.emptyStateDescription}>
-            Ninguna nota coincide con tu búsqueda. Intenta con otras palabras o
-            cambia el filtro activo.
-          </p>
-        </div>
+        <NotesEmptyState
+          title="Sin resultados"
+          description="Ninguna nota coincide con tu búsqueda. Intenta con otras palabras o cambia el filtro activo."
+        />
       )}
 
       <ConfirmDialog
@@ -80,6 +81,6 @@ export const NotesPage = () => {
         onConfirm={confirmDeleteNote}
         onCancel={cancelDeleteNote}
       />
-    </div>
+    </PageLayout>
   );
 };

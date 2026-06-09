@@ -1,30 +1,26 @@
 import clsx from 'clsx';
 import { FaRegTrashAlt, FaRegStar, FaStar } from 'react-icons/fa';
 import { LuFileText } from 'react-icons/lu';
+import { useState } from 'react';
 
 import { formatDate } from '@/utils/formatDate.utils';
 import { useNotes } from '@/context/notes';
 import type { NoteCardProps } from './NoteCard.types';
 import { NOTE_ICONS } from '@/data/noteIcons.data';
 import { Button } from '@/components/ui/Button';
-import { useState } from 'react';
-import styles, { iconBoxStyles, categoryBadgeStyles } from './NoteCard.styles';
-import { CATEGORY_LABELS, CATEGORY_ICONS } from './NoteCard.data';
+import styles, { iconBoxStyles } from './NoteCard.styles';
+import { NoteCategoryBadge } from './components/NoteCategoryBadge';
 import toast from 'react-hot-toast';
 
 export const NoteCard = ({ note }: NoteCardProps) => {
   const { requestDeleteNote } = useNotes();
   const [selected, setSelected] = useState<boolean>(false);
 
-  const iconBoxClass = note.color
-    ? iconBoxStyles[note.color]
-    : styles.iconBoxDefault;
+  const iconBoxClass = note.color ? iconBoxStyles[note.color] : styles.iconBoxDefault;
   const NoteIcon = note.icon ? NOTE_ICONS[note.icon] : LuFileText;
 
   const handleFavoriteClick = (): void => {
-    toast(
-      'Favoritos próximamente, por el momento solo visualización del estado del botón.',
-    );
+    toast('Favoritos próximamente, por el momento solo visualización del estado del botón.');
     setSelected((prev) => !prev);
   };
 
@@ -43,25 +39,7 @@ export const NoteCard = ({ note }: NoteCardProps) => {
 
         <div className={styles.footer}>
           <span className={styles.date}>{formatDate(note.createdAt)}</span>
-
-          {note.category &&
-            (() => {
-              const CategoryIcon = CATEGORY_ICONS[note.category!];
-              return (
-                <>
-                  <span className={styles.separator}>•</span>
-                  <span
-                    className={clsx(
-                      styles.badge,
-                      categoryBadgeStyles[note.category!],
-                    )}
-                  >
-                    <CategoryIcon size={10} />
-                    {CATEGORY_LABELS[note.category!]}
-                  </span>
-                </>
-              );
-            })()}
+          {note.category && <NoteCategoryBadge category={note.category} />}
         </div>
       </div>
 
