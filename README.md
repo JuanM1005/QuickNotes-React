@@ -2,13 +2,13 @@
 
 QuickNotes es una aplicación de notas construida con React, TypeScript, Vite y Tailwind CSS. El objetivo del proyecto es practicar conceptos fundamentales de React mientras se construye una interfaz limpia, modular y escalable.
 
-## Vista previa
+## Preview
 
-![QuickNotes](./docs/app_preview.png)
+![QuickNotes en escritorio](./docs/desktop.png)
 
 ## Descripción
 
-La aplicación permite crear notas con título, contenido, color, categoría e ícono. Las notas se muestran en tarjetas horizontales con ícono contextual, badge de categoría, favoritos y eliminación con confirmación. Incluye una sidebar colapsable en escritorio, una barra de navegación dock en móvil, búsqueda en tiempo real y filtros por categoría. Es instalable como PWA y persiste los datos en `localStorage`.
+La aplicación permite crear notas con título, contenido, color, categoría e ícono. Las notas se muestran en tarjetas con ícono contextual, badge de categoría, acciones de favorito, archivado y eliminación con confirmación. Incluye una sidebar colapsable en escritorio y una barra de navegación dock en móvil. Es instalable como PWA y persiste los datos en `localStorage`.
 
 Este proyecto forma parte de una práctica progresiva para reforzar conceptos como:
 
@@ -17,11 +17,10 @@ Este proyecto forma parte de una práctica progresiva para reforzar conceptos co
 - Context API con `SidebarContext` y `NotesContext`
 - Hooks personalizados para separar lógica de UI
 - Formularios controlados con validación
-- Búsqueda con debounce usando `useEffect`
 - Filtrado reactivo con `useMemo`
 - Modales accesibles (Escape, focus trap, scroll lock)
 - Sidebar colapsable con transición CSS animada
-- Estilos con Tailwind CSS y objetos de estilos por componente
+- Estilos con Tailwind CSS v4 y objetos de estilos por componente
 
 ## Tecnologías utilizadas
 
@@ -30,6 +29,7 @@ Este proyecto forma parte de una práctica progresiva para reforzar conceptos co
 - Vite 8
 - Tailwind CSS v4
 - React Icons v5
+- react-hot-toast
 - clsx
 - vite-plugin-pwa
 - Bun
@@ -62,64 +62,71 @@ Después abre la URL que muestra la terminal, normalmente `http://localhost:5173
 
 ```txt
 src/
-├─ App/
-│  ├─ components/
-│  │  ├─ AppContent/
-│  │  ├─ AppHeader/
-│  │  └─ AppToolbar/
-│  ├─ data/
-│  │  └─ toolbar.data.ts
-│  ├─ hooks/
-│  │  ├─ useNoteModal.ts
-│  │  └─ useNotesFilter.ts
-│  ├─ App.tsx
-│  └─ App.styles.ts
-├─ components/
-│  ├─ layout/
-│  │  ├─ MobileNav/
-│  │  └─ Sidebar/
-│  │     ├─ components/
-│  │     │  ├─ SidebarBrand/
-│  │     │  ├─ SidebarContent/
-│  │     │  ├─ SidebarFooter/
-│  │     │  ├─ SidebarItem/
-│  │     │  ├─ SidebarNav/
-│  │     │  ├─ SidebarQuickAction/
-│  │     │  └─ SidebarToggle/
-│  │     ├─ context/
-│  │     │  ├─ SidebarContext.ts
-│  │     │  ├─ SidebarProvider.tsx
-│  │     │  └─ useSidebarContext.ts
-│  │     └─ data/
-│  ├─ notes/
-│  │  ├─ NoteCard/
-│  │  ├─ NoteForm/
-│  │  │  └─ hooks/
-│  │  │     └─ useNoteForm.ts
-│  │  └─ NoteList/
-│  └─ ui/
-│     ├─ Button/
-│     ├─ ConfirmDialog/
-│     ├─ FormField/
-│     ├─ Input/
-│     ├─ Modal/
-│     │  └─ hooks/
-│     └─ Textarea/
-├─ constants/
-├─ context/
-│  └─ notes/
-│     ├─ NotesContext.ts
-│     ├─ NotesProvider.tsx
-│     └─ useNotes.ts
-├─ data/
-│  ├─ noteIcons.data.ts
-│  └─ notes.data.ts
-├─ types/
-│  └─ note.types.ts
-├─ utils/
-│  ├─ createNote.utils.ts
-│  └─ formatDate.utils.ts
-└─ main.tsx
+├── App/
+│   ├── App.tsx
+│   └── App.styles.ts
+├── assets/
+│   └── images/
+├── components/
+│   ├── feedback/
+│   │   └── ComingSoonState/
+│   ├── layout/
+│   │   ├── MobileNav/
+│   │   ├── PageHeader/
+│   │   ├── PageLayout/
+│   │   └── Sidebar/
+│   │       ├── components/
+│   │       │   ├── SidebarBrand/
+│   │       │   ├── SidebarContent/
+│   │       │   ├── SidebarFooter/
+│   │       │   ├── SidebarItem/
+│   │       │   ├── SidebarNav/
+│   │       │   ├── SidebarQuickAction/
+│   │       │   └── SidebarToggle/
+│   │       └── context/
+│   ├── notes/
+│   │   ├── NoteCard/
+│   │   ├── NoteDeleteDialog/
+│   │   ├── NoteForm/
+│   │   │   └── hooks/
+│   │   ├── NoteList/
+│   │   └── NotesEmptyState/
+│   └── ui/
+│       ├── Button/
+│       ├── ConfirmDialog/
+│       ├── FormField/
+│       ├── Input/
+│       ├── Modal/
+│       │   └── hooks/
+│       └── Textarea/
+├── constants/
+├── context/
+│   └── notes/
+├── data/
+│   ├── noteIcons.data.ts
+│   └── notes.data.ts
+├── hooks/
+│   ├── useNoteModal.ts
+│   └── useNotesFilter.ts
+├── pages/
+│   ├── ArchivedPage/
+│   ├── FavoritesPage/
+│   ├── NotesPage/
+│   │   ├── components/
+│   │   │   ├── NoteRecents/
+│   │   │   └── NotesToolbar/
+│   │   └── hooks/
+│   │       └── useNotesSearch.ts
+│   └── TrashPage/
+├── storage/
+│   ├── notes.storage.ts
+│   └── sidebar.storage.ts
+├── types/
+│   └── note.types.ts
+├── utils/
+│   ├── createNote.utils.ts
+│   └── formatDate.utils.ts
+└── main.tsx
 ```
 
 ## Modelo de datos
@@ -133,8 +140,15 @@ export type NoteColor =
   | 'purple'
   | 'red'
   | 'orange';
-export type NoteCategory = 'work' | 'personal' | 'ideas';
-export type NoteFilter = 'all' | NoteCategory;
+
+export type NoteCategory =
+  | 'work'
+  | 'personal'
+  | 'ideas'
+  | 'study'
+  | 'tasks'
+  | 'reminders';
+
 export type NoteIcon =
   | 'book'
   | 'lightbulb'
@@ -156,63 +170,67 @@ export interface Note {
   color?: NoteColor;
   category?: NoteCategory;
   icon?: NoteIcon;
+  isFavorite?: boolean;
+  isArchived?: boolean;
+  isDeleted?: boolean;
 }
 ```
 
 ### Campos
 
-| Campo       | Tipo           | Descripción                                                           |
-| ----------- | -------------- | --------------------------------------------------------------------- |
-| `id`        | `string`       | Identificador único generado con `crypto.randomUUID()`.               |
-| `title`     | `string`       | Título breve de la nota.                                              |
-| `content`   | `string`       | Contenido principal de la nota.                                       |
-| `createdAt` | `string`       | Fecha de creación en formato ISO.                                     |
-| `updatedAt` | `string`       | Fecha de última edición en formato ISO.                               |
-| `color`     | `NoteColor`    | Color opcional para personalizar la tarjeta (7 opciones).             |
-| `category`  | `NoteCategory` | Categoría opcional: trabajo, personal o ideas.                        |
-| `icon`      | `NoteIcon`     | Ícono opcional para el encabezado visual de la tarjeta (10 opciones). |
+| Campo        | Tipo           | Descripción                                                           |
+| ------------ | -------------- | --------------------------------------------------------------------- |
+| `id`         | `string`       | Identificador único generado con `crypto.randomUUID()`.               |
+| `title`      | `string`       | Título breve de la nota.                                              |
+| `content`    | `string`       | Contenido principal de la nota (máx. 500 caracteres).                 |
+| `createdAt`  | `string`       | Fecha de creación en formato ISO.                                     |
+| `updatedAt`  | `string`       | Fecha de última edición en formato ISO.                               |
+| `color`      | `NoteColor`    | Color opcional para personalizar la tarjeta (7 opciones).             |
+| `category`   | `NoteCategory` | Categoría opcional (6 opciones).                                      |
+| `icon`       | `NoteIcon`     | Ícono opcional para el encabezado visual de la tarjeta (10 opciones). |
+| `isFavorite` | `boolean`      | Indica si la nota está marcada como favorita.                         |
+| `isArchived` | `boolean`      | Indica si la nota está archivada.                                     |
+| `isDeleted`  | `boolean`      | Soft delete: la nota va a la papelera en lugar de eliminarse.         |
+
+## Páginas
+
+| Página           | Descripción                                                                       |
+| ---------------- | --------------------------------------------------------------------------------- |
+| `NotesPage`      | Página principal con búsqueda en tiempo real y filtros por categoría.             |
+| `FavoritesPage`  | Notas marcadas como favoritas.                                                    |
+| `ArchivedPage`   | ⚠️ En desarrollo — muestra las notas archivadas, funcionalidad aún incompleta.    |
+| `TrashPage`      | Papelera con opción de restaurar o eliminar permanentemente.                      |
 
 ## Componentes principales
 
-### `MobileNav`
-
-Barra de navegación tipo dock visible solo en móvil. Contiene los ítems de navegación a izquierda y derecha con un botón central flotante para crear una nota nueva. Comparte los ítems de navegación con `Sidebar` vía `SIDEBAR_ITEMS`.
-
 ### `Sidebar`
 
-Sidebar colapsable con ancho animado (`w-60` expandido, `w-20` colapsado). Contiene:
+Sidebar colapsable con ancho animado (`w-60` expandido, `w-20` colapsado). El estado colapsado se persiste en `localStorage` y se gestiona con `SidebarContext`. Contiene:
 
 - `SidebarBrand` — logo y nombre de la app
-- `SidebarNav` — lista de items de navegación con estado activo
-- `SidebarToggle` — botón flotante para colapsar/expandir
-- `SidebarFooter` — quick action para nueva nota + botón de cerrar sesión
+- `SidebarNav` — ítems de navegación con estado activo
+- `SidebarToggle` — botón para colapsar/expandir
+- `SidebarFooter` — quick action para nueva nota
 
-El estado colapsado se gestiona con `SidebarContext` y está disponible en todos los subcomponentes vía `useSidebar`.
+### `MobileNav`
 
-### `AppToolbar`
+Barra de navegación tipo dock visible solo en móvil. Contiene los ítems de navegación a izquierda y derecha con un botón central flotante para crear una nueva nota.
 
-Barra de herramientas con:
+### `PageHeader`
 
-- Input de búsqueda con debounce de 500 ms
-- Botones de filtro por categoría (`Todas`, `Trabajo`, `Personal`, `Ideas`) usando la variante `selected`/`secondary` del componente `Button`
+Encabezado de página con eyebrow, título, descripción e imagen opcional.
 
 ### `NoteCard`
 
-Tarjeta horizontal con:
+Tarjeta de nota con caja de ícono coloreada, título, contenido truncado, fecha y badge de categoría. Soporta tres variantes de acciones según la vista: `default`, `favorites` y `trash`.
 
-- Caja de ícono a la izquierda, coloreada según `note.color` (fallback a `LuFileText`)
-- Título, contenido truncado y fecha de creación formateada
-- Badge de categoría con ícono (trabajo / personal / ideas)
-- Botón de favorito (estado local por tarjeta, persistencia pendiente)
-- Botón de eliminar que dispara `ConfirmDialog` vía `NotesContext`
+### `NoteDeleteDialog`
+
+Diálogo de confirmación con dos modos: mover a papelera o eliminación permanente desde la papelera.
 
 ### `NoteForm`
 
-Formulario controlado para crear notas. Incluye título, contenido, selector de color, selector de ícono y selector de categoría con toggle (clic en la misma categoría la deselecciona).
-
-### `ConfirmDialog`
-
-Diálogo de confirmación reutilizable con variante `danger`. Se usa al eliminar notas y recibe callbacks `onConfirm` / `onCancel`. Se renderiza dentro de `AppContent` y su estado lo gestiona `NotesContext`.
+Formulario controlado para crear notas con selector de color, ícono y categoría.
 
 ### `Modal`
 
@@ -220,19 +238,28 @@ Modal accesible con cierre por Escape (`useEscapeKey`), bloqueo de scroll (`useL
 
 ### `Button`
 
-Componente reutilizable con variantes `primary`, `secondary`, `selected`, `unstyled`; tamaños `sm`, `md`, `lg`; y opción de ancho completo.
+Componente reutilizable con variantes `primary`, `secondary`, `selected`, `unstyled` y tamaños `sm`, `md`.
 
 ## Hooks personalizados
 
-| Hook             | Descripción                                                                |
-| ---------------- | -------------------------------------------------------------------------- |
-| `useNoteModal`   | Estado del modal de nueva nota: `isOpen`, `open`, `close`, `handleSubmit`. |
-| `useNotesFilter` | Búsqueda con debounce y filtro por categoría. Retorna `filteredNotes`.     |
-| `useNoteForm`    | Estado del formulario, validación y reset.                                 |
-| `useSidebar`     | Accede a `isCollapsed` y `toggleSidebar` desde cualquier componente.       |
-| `useEscapeKey`   | Dispara un callback al presionar Escape.                                   |
-| `useFocusTrap`   | Aplica `inert` al `#root` mientras el modal está abierto.                  |
-| `useLockScroll`  | Bloquea el scroll del body mientras el modal está abierto.                 |
+| Hook               | Descripción                                                                  |
+| ------------------ | ---------------------------------------------------------------------------- |
+| `useNotes`         | Accede al contexto global de notas.                                          |
+| `useNoteModal`     | Estado del modal de nueva nota: `isOpen`, `open`, `close`, `handleSubmit`.   |
+| `useNotesFilter`   | Filtra notas por estado (`favorites`, `archived`, `deleted`).                |
+| `useNotesSearch`   | Búsqueda por texto y filtro por categoría en `NotesPage`. Expone `isSearching`. |
+| `useNoteForm`      | Estado del formulario, validación y reset.                                   |
+| `useSidebar`       | Accede a `isCollapsed`, `toggleSidebar`, `activePage` y `setActivePage`.     |
+| `useEscapeKey`     | Dispara un callback al presionar Escape.                                      |
+| `useFocusTrap`     | Aplica `inert` al `#root` mientras el modal está abierto.                    |
+| `useLockScroll`    | Bloquea el scroll del body mientras el modal está abierto.                   |
+
+## Almacenamiento
+
+| Archivo              | Clave localStorage               | Descripción                                      |
+| -------------------- | -------------------------------- | ------------------------------------------------ |
+| `notes.storage.ts`   | `quicknotes-notes`               | Persiste y recupera el array de notas.           |
+| `sidebar.storage.ts` | `quicknotes-sidebar-collapsed`   | Persiste el estado colapsado del sidebar.        |
 
 ## Utilidades
 
@@ -255,9 +282,13 @@ formatDate('2026-06-04T10:30:00.000Z');
 
 Se usa `NotesContext` para compartir el estado de notas sin prop drilling, y `SidebarContext` para que todos los subcomponentes de la sidebar accedan al estado colapsado sin recibir props manualmente.
 
-### Debounce manual en búsqueda
+### Soft delete con papelera
 
-El debounce se implementa con `useEffect` + `setTimeout` + `clearTimeout` en lugar de una librería externa, para practicar el patrón directamente.
+En lugar de eliminar notas directamente, se marcan con `isDeleted: true` y se mueven a la papelera. La eliminación permanente requiere una segunda confirmación.
+
+### `isSearching` en lugar de `notes.length`
+
+Para decidir qué empty state mostrar se usa un flag `isSearching` (hay texto en el buscador o filtro activo distinto de "all") en lugar de comparar el total de notas. Así el estado "No hay notas todavía" no aparece incorrectamente cuando existen notas eliminadas o archivadas.
 
 ### Estilos como objetos separados
 
@@ -265,30 +296,28 @@ Cada componente tiene su archivo `.styles.ts` con un objeto de clases de Tailwin
 
 ### Fechas como `string`
 
-Las fechas se guardan en formato ISO porque en el futuro se usará `localStorage`, que serializa todo como texto.
+Las fechas se guardan en formato ISO porque `localStorage` serializa todo como texto.
 
 ## Estado actual
 
-- Tarjetas horizontales con ícono, color, categoría y badge.
-- Creación de notas desde un modal accesible (sidebar en escritorio, dock en móvil).
-- Eliminación de notas con diálogo de confirmación.
-- Marcado de notas como favoritas con estado local por tarjeta (persistencia pendiente).
-- Búsqueda en tiempo real con debounce.
-- Filtros por categoría.
-- Sidebar colapsable con transición animada (escritorio).
-- Barra de navegación dock en móvil (`MobileNav`).
-- Persistencia de notas en `localStorage`.
+- Creación de notas desde un modal accesible.
+- Favoritos, archivado y papelera con soft delete.
+- Restauración y eliminación permanente desde la papelera.
+- Búsqueda en tiempo real por título y contenido (NotesPage).
+- Filtros por categoría (NotesPage).
+- Notas recientes en la página principal.
+- Empty states diferenciados: sin notas, sin resultados de búsqueda.
+- Sidebar colapsable con persistencia (escritorio).
+- Barra de navegación dock en móvil.
+- Persistencia en `localStorage`.
+- Notificaciones con `react-hot-toast`.
 - Instalable como PWA.
-
-> Actualmente el proyecto se encuentra en una versión inicial funcional, enfocada en practicar React, TypeScript, componentes reutilizables, manejo de estado y persistencia local.
 
 ## Próximas mejoras
 
-- Permitir la edición de notas existentes.
-- Persistir notas favoritas en localStorage.
-- Implementar la funcionalidad completa de la sidebar, incluyendo las secciones de notas, favoritas, archivadas y papelera.
-- Agregar soporte para modo oscuro.
-- Evaluar la implementación de autenticación de usuario y cierre de sesión.
+- Búsqueda y filtros en FavoritesPage, ArchivedPage y TrashPage.
+- Edición de notas existentes.
+- Modo oscuro.
 
 ## Autor
 
