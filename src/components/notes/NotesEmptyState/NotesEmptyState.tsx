@@ -9,7 +9,7 @@ export const NotesEmptyState = ({
   tipText,
 }: NotesEmptyStateProps) => {
   return (
-    <section className="mx-auto flex min-h-[70vh] w-full max-w-2xl flex-col items-center justify-center gap-6 md:gap-7 px-4 md:px-8 py-12 md:py-16 text-center">
+    <section className="mx-auto flex flex-1 w-full max-w-2xl flex-col items-center justify-center gap-6 md:gap-7 px-4 md:px-8 py-12 md:py-16 text-center">
       <div className="relative flex items-center justify-center">
         <div className="absolute inset-0 rounded-full bg-linear-to-br from-blue-100/60 to-slate-100/60 blur-xl" />
         <div className="relative flex items-center justify-center rounded-full bg-linear-to-br from-white to-slate-50 p-6 md:p-7 ring-1 ring-slate-200/70 shadow-sm">

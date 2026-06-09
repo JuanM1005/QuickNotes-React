@@ -33,10 +33,13 @@ export const useNotesSearch = () => {
     );
   }, [notes, searchQuery, activeFilter]);
 
+  const isSearching = searchQuery.trim() !== '' || activeFilter !== 'all';
+
   return {
     searchQuery,
     activeFilter,
     filteredNotes,
+    isSearching,
     setSearchQuery,
     setActiveFilter,
   };
