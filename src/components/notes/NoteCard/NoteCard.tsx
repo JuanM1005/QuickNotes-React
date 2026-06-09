@@ -3,20 +3,19 @@ import { LuFileText } from 'react-icons/lu';
 import { formatDate } from '@/utils/formatDate.utils';
 import type { NoteCardProps } from './NoteCard.types';
 import { NOTE_ICONS } from '@/data/noteIcons.data';
-import styles, { iconBoxStyles } from './NoteCard.styles';
+import styles, { iconBoxStyles, cardColorStyles } from './NoteCard.styles';
 import { NoteCategoryBadge } from './components/NoteCategoryBadge';
 import { NoteDefaultActions } from './components/NoteDefaultActions';
 import { NoteFavoritesActions } from './components/NoteFavoritesActions';
 import { NoteTrashActions } from './components/NoteTrashActions';
 
 export const NoteCard = ({ note, variant = 'default' }: NoteCardProps) => {
-  const iconBoxClass = note.color
-    ? iconBoxStyles[note.color]
-    : styles.iconBoxDefault;
+  const cardColorClass = note.color ? cardColorStyles[note.color] : styles.cardDefault;
+  const iconBoxClass = note.color ? iconBoxStyles[note.color] : styles.iconBoxDefault;
   const NoteIcon = note.icon ? NOTE_ICONS[note.icon] : LuFileText;
 
   return (
-    <article className={styles.card}>
+    <article className={clsx(styles.card, cardColorClass)}>
       <div className={clsx(styles.iconBox, iconBoxClass)}>
         <NoteIcon size={28} />
       </div>
