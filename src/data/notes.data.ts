@@ -252,7 +252,8 @@ export const NOTES: Note[] = [
   {
     id: '20',
     title: 'Inspiración de interfaz',
-    content: 'Guardar referencias visuales para mejorar la experiencia de usuario.',
+    content:
+      'Guardar referencias visuales para mejorar la experiencia de usuario.',
     createdAt: '2026-06-05T19:30:00.000Z',
     updatedAt: '2026-06-05T19:30:00.000Z',
     color: 'green',

@@ -1,18 +1,15 @@
 import type { NoteCategory, NoteColor } from '@/types/note.types';
 
 export const cardColorStyles: Record<NoteColor, string> = {
-  blue:
-    'bg-blue-50/70 before:bg-blue-500 before:shadow-[0_0_14px_rgba(59,130,246,0.65)] hover:shadow-blue-200',
+  blue: 'bg-blue-50/70 before:bg-blue-500 before:shadow-[0_0_14px_rgba(59,130,246,0.65)] hover:shadow-blue-200',
   green:
     'bg-emerald-50/70 before:bg-emerald-500 before:shadow-[0_0_14px_rgba(16,185,129,0.65)] hover:shadow-emerald-200',
   yellow:
     'bg-yellow-50/70 before:bg-yellow-400 before:shadow-[0_0_14px_rgba(250,204,21,0.65)] hover:shadow-yellow-200',
-  pink:
-    'bg-pink-50/70 before:bg-pink-400 before:shadow-[0_0_14px_rgba(244,114,182,0.65)] hover:shadow-pink-200',
+  pink: 'bg-pink-50/70 before:bg-pink-400 before:shadow-[0_0_14px_rgba(244,114,182,0.65)] hover:shadow-pink-200',
   purple:
     'bg-purple-50/70 before:bg-purple-500 before:shadow-[0_0_14px_rgba(168,85,247,0.65)] hover:shadow-purple-200',
-  red:
-    'bg-red-50/70 before:bg-red-500 before:shadow-[0_0_14px_rgba(239,68,68,0.65)] hover:shadow-red-200',
+  red: 'bg-red-50/70 before:bg-red-500 before:shadow-[0_0_14px_rgba(239,68,68,0.65)] hover:shadow-red-200',
   orange:
     'bg-orange-50/70 before:bg-orange-500 before:shadow-[0_0_14px_rgba(249,115,22,0.65)] hover:shadow-orange-200',
 };
@@ -37,8 +34,7 @@ export const categoryBadgeStyles: Record<NoteCategory, string> = {
 };
 
 const styles = {
-  card:
-    'group relative flex min-h-36 items-center gap-4 overflow-hidden rounded-2xl px-4 py-4 shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md before:absolute before:left-0 before:top-0 before:h-1 before:w-28 before:rounded-br-full before:content-[""]',
+  card: 'group relative flex min-h-36 items-center gap-4 overflow-hidden rounded-2xl px-4 py-4 shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md before:absolute before:left-0 before:top-0 before:h-1 before:w-28 before:rounded-br-full before:content-[""]',
 
   cardDefault:
     'bg-white before:bg-slate-300 before:shadow-[0_0_12px_rgba(148,163,184,0.45)]',
