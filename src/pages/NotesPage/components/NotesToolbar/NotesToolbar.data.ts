@@ -7,7 +7,7 @@ import {
   FaTasks,
   FaBell,
 } from 'react-icons/fa';
-import type { FilterItemsProps } from './toolbar.types';
+import type { FilterItemsProps } from './NotesToolbar.types';
 
 export const FILTERS_ITEMS: FilterItemsProps[] = [
   { icon: FaBorderAll, label: 'Todas', value: 'all' },

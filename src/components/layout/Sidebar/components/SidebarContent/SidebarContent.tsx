@@ -1,4 +1,4 @@
-import { useNoteModal } from '@/App/hooks/useNoteModal';
+import { useNoteModal } from '@/hooks/useNoteModal';
 import { SidebarBrand } from '../SidebarBrand';
 import { SidebarNav } from '../SidebarNav';
 import { SidebarFooter } from '../SidebarFooter';

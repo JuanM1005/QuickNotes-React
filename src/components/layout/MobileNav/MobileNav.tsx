@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { LuPlus } from 'react-icons/lu';
 import { Modal } from '@/components/ui/Modal';
 import { NoteForm } from '@/components/notes/NoteForm';
-import { useNoteModal } from '@/App/hooks/useNoteModal';
+import { useNoteModal } from '@/hooks/useNoteModal';
 import { SIDEBAR_ITEMS } from '@/components/layout/Sidebar/data';
 import type { SidebarItemId } from '@/components/layout/Sidebar/data/Sidebar.data.types';
 import { Button } from '@/components/ui/Button';

@@ -1,24 +1,24 @@
 import { FaSearch } from 'react-icons/fa';
 
 import type { NoteFilter } from '@/types/note.types';
-import styles from './AppToolbar.styles';
+import styles from './NotesToolbar.styles';
 
-import { FILTERS_ITEMS } from '../../data';
+import { FILTERS_ITEMS } from './NotesToolbar.data';
 import { Button } from '@/components/ui/Button';
 
-interface AppToolbarProps {
+interface NotesToolbarProps {
   searchQuery: string;
   activeFilter: NoteFilter;
   onSearch: (value: string) => void;
   onFilterChange: (filter: NoteFilter) => void;
 }
 
-export const AppToolbar = ({
+export const NotesToolbar = ({
   searchQuery,
   activeFilter,
   onSearch,
   onFilterChange,
-}: AppToolbarProps) => {
+}: NotesToolbarProps) => {
   return (
     <div className={styles.toolbar}>
       <div className={styles.searchWrapper}>

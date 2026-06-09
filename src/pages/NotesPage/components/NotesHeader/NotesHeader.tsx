@@ -1,7 +1,7 @@
-import styles from './AppHeader.styles';
+import styles from './NotesHeader.styles';
 import { QUICKNOTES_LOGO_SRC } from '@/constants';
 
-export const AppHeader = () => {
+export const NotesHeader = () => {
   return (
     <header className={styles.header}>
       <div className={styles.content}>

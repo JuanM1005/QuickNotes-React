@@ -1,15 +1,15 @@
 import { NoteList } from '@/components/notes/NoteList';
 import { useNotes } from '@/context/notes';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
-import { AppHeader } from '../AppHeader';
-import { AppToolbar } from '../AppToolbar';
-import { useNotesFilter } from '../../hooks/useNotesFilter';
+import { NotesHeader } from './components/NotesHeader';
+import { NotesToolbar } from './components/NotesToolbar';
+import { useNotesFilter } from './hooks/useNotesFilter';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { Button } from '@/components/ui/Button';
-import styles from './AppContent.styles';
+import styles from './NotesPage.styles';
 import toast from 'react-hot-toast';
 
-export const AppContent = () => {
+export const NotesPage = () => {
   const { notes, noteToDelete, confirmDeleteNote, cancelDeleteNote } =
     useNotes();
   const {
@@ -28,9 +28,9 @@ export const AppContent = () => {
 
   return (
     <div className={styles.container}>
-      <AppHeader />
+      <NotesHeader />
 
-      <AppToolbar
+      <NotesToolbar
         searchQuery={searchQuery}
         activeFilter={activeFilter}
         onSearch={setSearchQuery}

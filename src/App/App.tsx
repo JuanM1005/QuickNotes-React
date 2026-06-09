@@ -1,4 +1,4 @@
-import { AppContent } from './components/AppContent/AppContent';
+import { NotesPage } from '../pages/NotesPage/NotesPage';
 import { NotesProvider } from '@/context/notes';
 import styles from './App.styles';
 import { Sidebar, SidebarProvider } from '@/components/layout/Sidebar';
@@ -11,7 +11,7 @@ const App = () => {
       <SidebarProvider>
         <main className={styles.main}>
           <Sidebar />
-          <AppContent />
+          <NotesPage />
           <MobileNav />
         </main>
 
