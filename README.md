@@ -194,12 +194,12 @@ export interface Note {
 
 ## Páginas
 
-| Página           | Descripción                                                                       |
-| ---------------- | --------------------------------------------------------------------------------- |
-| `NotesPage`      | Página principal con búsqueda en tiempo real y filtros por categoría.             |
-| `FavoritesPage`  | Notas marcadas como favoritas.                                                    |
-| `ArchivedPage`   | ⚠️ En desarrollo — muestra las notas archivadas, funcionalidad aún incompleta.    |
-| `TrashPage`      | Papelera con opción de restaurar o eliminar permanentemente.                      |
+| Página          | Descripción                                                                    |
+| --------------- | ------------------------------------------------------------------------------ |
+| `NotesPage`     | Página principal con búsqueda en tiempo real y filtros por categoría.          |
+| `FavoritesPage` | Notas marcadas como favoritas.                                                 |
+| `ArchivedPage`  | ⚠️ En desarrollo — muestra las notas archivadas, funcionalidad aún incompleta. |
+| `TrashPage`     | Papelera con opción de restaurar o eliminar permanentemente.                   |
 
 ## Componentes principales
 
@@ -242,24 +242,24 @@ Componente reutilizable con variantes `primary`, `secondary`, `selected`, `unsty
 
 ## Hooks personalizados
 
-| Hook               | Descripción                                                                  |
-| ------------------ | ---------------------------------------------------------------------------- |
-| `useNotes`         | Accede al contexto global de notas.                                          |
-| `useNoteModal`     | Estado del modal de nueva nota: `isOpen`, `open`, `close`, `handleSubmit`.   |
-| `useNotesFilter`   | Filtra notas por estado (`favorites`, `archived`, `deleted`).                |
-| `useNotesSearch`   | Búsqueda por texto y filtro por categoría en `NotesPage`. Expone `isSearching`. |
-| `useNoteForm`      | Estado del formulario, validación y reset.                                   |
-| `useSidebar`       | Accede a `isCollapsed`, `toggleSidebar`, `activePage` y `setActivePage`.     |
-| `useEscapeKey`     | Dispara un callback al presionar Escape.                                      |
-| `useFocusTrap`     | Aplica `inert` al `#root` mientras el modal está abierto.                    |
-| `useLockScroll`    | Bloquea el scroll del body mientras el modal está abierto.                   |
+| Hook             | Descripción                                                                     |
+| ---------------- | ------------------------------------------------------------------------------- |
+| `useNotes`       | Accede al contexto global de notas.                                             |
+| `useNoteModal`   | Estado del modal de nueva nota: `isOpen`, `open`, `close`, `handleSubmit`.      |
+| `useNotesFilter` | Filtra notas por estado (`favorites`, `archived`, `deleted`).                   |
+| `useNotesSearch` | Búsqueda por texto y filtro por categoría en `NotesPage`. Expone `isSearching`. |
+| `useNoteForm`    | Estado del formulario, validación y reset.                                      |
+| `useSidebar`     | Accede a `isCollapsed`, `toggleSidebar`, `activePage` y `setActivePage`.        |
+| `useEscapeKey`   | Dispara un callback al presionar Escape.                                        |
+| `useFocusTrap`   | Aplica `inert` al `#root` mientras el modal está abierto.                       |
+| `useLockScroll`  | Bloquea el scroll del body mientras el modal está abierto.                      |
 
 ## Almacenamiento
 
-| Archivo              | Clave localStorage               | Descripción                                      |
-| -------------------- | -------------------------------- | ------------------------------------------------ |
-| `notes.storage.ts`   | `quicknotes-notes`               | Persiste y recupera el array de notas.           |
-| `sidebar.storage.ts` | `quicknotes-sidebar-collapsed`   | Persiste el estado colapsado del sidebar.        |
+| Archivo              | Clave localStorage             | Descripción                               |
+| -------------------- | ------------------------------ | ----------------------------------------- |
+| `notes.storage.ts`   | `quicknotes-notes`             | Persiste y recupera el array de notas.    |
+| `sidebar.storage.ts` | `quicknotes-sidebar-collapsed` | Persiste el estado colapsado del sidebar. |
 
 ## Utilidades
 

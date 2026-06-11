@@ -28,7 +28,7 @@ export type NoteIcon =
   | 'home'
   | 'shopping';
 
-export type NoteStatus = 'favorites' | 'archived' | 'deleted';
+export type NoteStatus = 'active' | 'favorites' | 'archived' | 'deleted';
 
 export interface Note {
   id: string;

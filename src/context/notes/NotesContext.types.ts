@@ -12,6 +12,7 @@ export interface NotesContextValue {
   noteToPermanentlyDelete: Note | null;
   addNote: (input: NoteInput) => void;
   toggleFavorite: (id: string) => void;
+  toggleArchive: (id: string) => void;
   requestDeleteNote: (id: string) => void;
   confirmDeleteNote: () => void;
   cancelDeleteNote: () => void;

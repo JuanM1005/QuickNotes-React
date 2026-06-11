@@ -38,6 +38,21 @@ export const NotesProvider = ({ children }: NotesProviderProps) => {
     );
   };
 
+  // Alterna el campo isArchived de la nota indicada.
+  const toggleArchive = (id: string) => {
+    let willArchive = false;
+    setNotes((prev) =>
+      prev.map((note) => {
+        if (note.id !== id) return note;
+        willArchive = !note.isArchived;
+        return { ...note, isArchived: willArchive };
+      }),
+    );
+    toast.success(willArchive ? 'Nota archivada.' : 'Nota desarchivada.', {
+      duration: 3000,
+    });
+  };
+
   // Borrado en 2 pasos: primero se registra la nota a eliminar (abre el diálogo),
   // luego el usuario confirma o cancela.
   const requestDeleteNote = (id: string): void => {
@@ -95,6 +110,7 @@ export const NotesProvider = ({ children }: NotesProviderProps) => {
         noteToPermanentlyDelete,
         addNote,
         toggleFavorite,
+        toggleArchive,
         requestDeleteNote,
         confirmDeleteNote,
         cancelDeleteNote,

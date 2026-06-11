@@ -1,32 +1,35 @@
-// import { PageHeader } from '@/components/layout/PageHeader';
 import { PageLayout } from '@/components/layout/PageLayout';
-// import { NoteList } from '@/components/notes/NoteList';
-// import { NotesEmptyState } from '@/components/notes/NotesEmptyState/NotesEmptyState';
-// import { APP_IMAGES } from '@/constants';
-// import { useNotesFilter } from '@/hooks/useNotesFilter';
-// import { MdArchive } from 'react-icons/md';
-// import styles from './ArchivedPage.styles';
-import { ComingSoonState } from '../../components/feedback/ComingSoonState/ComingSoonState';
+import { PageHeader } from '@/components/layout/PageHeader';
+import { NoteList } from '@/components/notes/NoteList';
+import { useNotesFilter } from '@/hooks/useNotesFilter';
+import { APP_IMAGES } from '@/constants';
+import { NotesEmptyState } from '@/components/notes/NotesEmptyState/NotesEmptyState';
+import { MdArchive } from 'react-icons/md';
+import styles from './ArchivedPage.styles';
+import { useNotesSearch } from '@/hooks/useNotesSearch';
+import { NotesSearchInput } from '../components/NotesSearchInput';
 
 export const ArchivedPage = () => {
-  // const allArchived = useNotesFilter('archived');
-  // const searchQuery = ''; // TODO: conectar con búsqueda
-  // const filteredArchived = allArchived;
+  const allArchived = useNotesFilter('archived');
+  const { filteredNotes, searchTerm, setSearchTerm } =
+    useNotesSearch(allArchived);
 
   return (
     <PageLayout>
-
-      <ComingSoonState title='Sección de notas archivadas' />
-      {/* {filteredArchived.length > 0 ? (
+      {filteredNotes.length > 0 ? (
         <>
           <PageHeader
             title="Archivadas"
-            description="Tus notas archivadas para consultar"
+            description="Tus notas guardadas para más adelante"
             image={APP_IMAGES.Icons.archived}
-            imageAlt="Notas archivadas"
+            imageAlt="Archivadas"
           />
 
-          <NoteList notes={filteredArchived} variant="archived" />
+          {allArchived.length > 0 && (
+            <NotesSearchInput value={searchTerm} onChange={setSearchTerm} />
+          )}
+
+          <NoteList notes={filteredNotes} variant="archived" />
         </>
       ) : (
         <>
@@ -35,7 +38,11 @@ export const ArchivedPage = () => {
             <h2 className={styles.simpleHeaderTitle}>Archivadas</h2>
           </div>
 
-          {searchQuery ? (
+          {allArchived.length > 0 && (
+            <NotesSearchInput value={searchTerm} onChange={setSearchTerm} />
+          )}
+
+          {searchTerm ? (
             <NotesEmptyState
               imageSrc={APP_IMAGES.Icons.notFound}
               imageAlt="No encontrado"
@@ -47,13 +54,13 @@ export const ArchivedPage = () => {
               imageSrc={APP_IMAGES.Icons.archivedNone}
               imageAlt="Sin notas archivadas"
               title="No hay notas archivadas"
-              description="Las notas que archives aparecerán aquí para que puedas encontrarlas fácilmente cuando las necesites."
+              description="Las notas que archives aparecerán aquí para mantener tu espacio principal organizado."
               tipIcon={MdArchive}
-              tipText="Toca el ícono de archivo en cualquier nota para agregarla a archivados."
+              tipText="Toca el ícono de archivo en cualquier nota para guardarla aquí."
             />
           )}
         </>
-      )} */}
+      )}
     </PageLayout>
   );
 };

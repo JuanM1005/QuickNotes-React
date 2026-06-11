@@ -1,22 +1,18 @@
 import { NoteList } from '@/components/notes/NoteList';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { PageHeader } from '@/components/layout/PageHeader';
-import { NotesToolbar } from './components/NotesToolbar';
-import { useNotesSearch } from './hooks/useNotesSearch';
+import { NotesSearchInput } from '../components/NotesSearchInput';
 import { APP_IMAGES } from '@/constants';
 import { NotesEmptyState } from '@/components/notes/NotesEmptyState/NotesEmptyState';
 import { NotesRecents } from './components/NoteRecents/NotesRecents';
 import styles from './NotesPage.styles';
+import { useNotesFilter } from '@/hooks/useNotesFilter';
+import { useNotesSearch } from '@/hooks/useNotesSearch';
 
 export const NotesPage = () => {
-  const {
-    searchQuery,
-    activeFilter,
-    filteredNotes,
-    isSearching,
-    setSearchQuery,
-    setActiveFilter,
-  } = useNotesSearch();
+  const activeNotes = useNotesFilter('active');
+  const { filteredNotes, searchTerm, setSearchTerm } =
+    useNotesSearch(activeNotes);
 
   return (
     <PageLayout>
@@ -35,19 +31,14 @@ export const NotesPage = () => {
         </div>
       )}
 
-      <NotesToolbar
-        searchQuery={searchQuery}
-        activeFilter={activeFilter}
-        onSearch={setSearchQuery}
-        onFilterChange={setActiveFilter}
-      />
+      <NotesSearchInput value={searchTerm} onChange={setSearchTerm} />
 
       {filteredNotes.length > 0 ? (
         <>
           <NotesRecents />
           <NoteList notes={filteredNotes} variant="default" />
         </>
-      ) : isSearching ? (
+      ) : searchTerm ? (
         <NotesEmptyState
           imageSrc={APP_IMAGES.Icons.notFound}
           imageAlt="No encontrado"

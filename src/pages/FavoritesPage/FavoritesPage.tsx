@@ -1,6 +1,3 @@
-// import { useMemo, useState } from 'react';
-// import { FaSearch } from 'react-icons/fa';
-
 import { PageLayout } from '@/components/layout/PageLayout';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { NoteList } from '@/components/notes/NoteList';
@@ -9,15 +6,17 @@ import { APP_IMAGES } from '@/constants';
 import { NotesEmptyState } from '@/components/notes/NotesEmptyState/NotesEmptyState';
 import { MdStars } from 'react-icons/md';
 import styles from './FavoritesPage.styles';
+import { useNotesSearch } from '@/hooks/useNotesSearch';
+import { NotesSearchInput } from '../components/NotesSearchInput';
 
 export const FavoritesPage = () => {
   const allFavorites = useNotesFilter('favorites');
-  const searchQuery = ''; // TODO: conectar con búsqueda
-  const filteredFavorites = allFavorites;
+  const { filteredNotes, searchTerm, setSearchTerm } =
+    useNotesSearch(allFavorites);
 
   return (
     <PageLayout>
-      {filteredFavorites.length > 0 ? (
+      {filteredNotes.length > 0 ? (
         <>
           <PageHeader
             title="Favoritos"
@@ -26,7 +25,11 @@ export const FavoritesPage = () => {
             imageAlt="Favoritos"
           />
 
-          <NoteList notes={filteredFavorites} variant="favorites" />
+          {allFavorites.length > 0 && (
+            <NotesSearchInput value={searchTerm} onChange={setSearchTerm} />
+          )}
+
+          <NoteList notes={filteredNotes} variant="favorites" />
         </>
       ) : (
         <>
@@ -35,7 +38,11 @@ export const FavoritesPage = () => {
             <h2 className={styles.simpleHeaderTitle}>Favoritos</h2>
           </div>
 
-          {searchQuery ? (
+          {allFavorites.length > 0 && (
+            <NotesSearchInput value={searchTerm} onChange={setSearchTerm} />
+          )}
+
+          {searchTerm ? (
             <NotesEmptyState
               imageSrc={APP_IMAGES.Icons.notFound}
               imageAlt="No encontrado"

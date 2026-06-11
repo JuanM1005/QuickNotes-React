@@ -16,7 +16,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       workbox: {
-        cleanupOutdatedCaches: true
+        cleanupOutdatedCaches: true,
       },
       manifest: {
         name: 'QuickNotes',

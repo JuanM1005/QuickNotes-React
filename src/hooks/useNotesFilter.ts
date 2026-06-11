@@ -6,6 +6,8 @@ export const useNotesFilter = (status: NoteStatus): Note[] => {
   const { notes } = useNotes();
 
   return useMemo(() => {
+    if (status === 'active')
+      return notes.filter((note) => !note.isArchived && !note.isDeleted);
     if (status === 'favorites') return notes.filter((note) => note.isFavorite);
     if (status === 'archived') return notes.filter((note) => note.isArchived);
     if (status === 'deleted') return notes.filter((note) => note.isDeleted);

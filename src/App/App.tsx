@@ -5,10 +5,10 @@ import { useSidebar } from '@/components/layout/Sidebar/context/useSidebarContex
 import { MobileNav } from '@/components/layout/MobileNav';
 import { NotesPage } from '@/pages/NotesPage/NotesPage';
 import { FavoritesPage } from '@/pages/FavoritesPage/FavoritesPage';
+import { ArchivedPage } from '@/pages/ArchivedPage/ArchivedPage';
 import { TrashPage } from '@/pages/TrashPage';
 import { Toaster } from 'react-hot-toast';
 import styles from './App.styles';
-import { ArchivedPage } from '@/pages/ArchivedPage/ArchivedPage';
 
 const App = () => {
   return (

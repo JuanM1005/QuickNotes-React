@@ -6,15 +6,17 @@ import { useNotesFilter } from '@/hooks/useNotesFilter';
 import { APP_IMAGES } from '@/constants';
 import { MdOutlineAutoDelete } from 'react-icons/md';
 import styles from './TrashPage.styles';
+import { useNotesSearch } from '@/hooks/useNotesSearch';
+import { NotesSearchInput } from '../components/NotesSearchInput';
 
 export const TrashPage = () => {
   const trashNotes = useNotesFilter('deleted');
-  const searchQuery = ''; // TODO: conectar con búsqueda
-  const filteredTrash = trashNotes;
+  const { filteredNotes, searchTerm, setSearchTerm } =
+    useNotesSearch(trashNotes);
 
   return (
     <PageLayout>
-      {filteredTrash.length > 0 ? (
+      {filteredNotes.length > 0 ? (
         <>
           <PageHeader
             title="Papelera"
@@ -22,7 +24,12 @@ export const TrashPage = () => {
             image={APP_IMAGES.Icons.trash}
             imageAlt="Papelera"
           />
-          <NoteList notes={filteredTrash} variant="trash" />
+
+          {trashNotes.length > 0 && (
+            <NotesSearchInput value={searchTerm} onChange={setSearchTerm} />
+          )}
+
+          <NoteList notes={filteredNotes} variant="trash" />
         </>
       ) : (
         <>
@@ -31,7 +38,11 @@ export const TrashPage = () => {
             <h2 className={styles.simpleHeaderTitle}>Papelera</h2>
           </div>
 
-          {searchQuery ? (
+          {trashNotes.length > 0 && (
+            <NotesSearchInput value={searchTerm} onChange={setSearchTerm} />
+          )}
+
+          {searchTerm ? (
             <NotesEmptyState
               imageSrc={APP_IMAGES.Icons.notFound}
               imageAlt="No encontrado"

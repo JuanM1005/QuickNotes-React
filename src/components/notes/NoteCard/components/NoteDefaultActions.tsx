@@ -1,4 +1,5 @@
 import { FaRegStar, FaStar, FaTrash } from 'react-icons/fa';
+import { MdArchive } from 'react-icons/md';
 import { Button } from '@/components/ui/Button';
 import { useNotes } from '@/context/notes';
 import actionStyles from './NoteActions.styles';
@@ -12,7 +13,7 @@ export const NoteDefaultActions = ({
   noteId,
   isFavorite,
 }: NoteDefaultActionsProps) => {
-  const { toggleFavorite, requestDeleteNote } = useNotes();
+  const { toggleFavorite, toggleArchive, requestDeleteNote } = useNotes();
 
   return (
     <>
@@ -27,8 +28,17 @@ export const NoteDefaultActions = ({
 
       <Button
         variant="unstyled"
+        onClick={() => toggleArchive(noteId)}
+        aria-label="Archivar"
+        className={actionStyles.archiveBtn}
+      >
+        <MdArchive size={16} />
+      </Button>
+
+      <Button
+        variant="unstyled"
         onClick={() => requestDeleteNote(noteId)}
-        aria-label={isFavorite ? 'Mover a papelera' : 'Mover a papelera'}
+        aria-label="Mover a papelera"
         className={actionStyles.paperBtn}
       >
         <FaTrash size={14} />

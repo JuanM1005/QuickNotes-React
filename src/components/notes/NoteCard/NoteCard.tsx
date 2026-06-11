@@ -8,6 +8,7 @@ import { NoteCategoryBadge } from './components/NoteCategoryBadge';
 import { NoteDefaultActions } from './components/NoteDefaultActions';
 import { NoteFavoritesActions } from './components/NoteFavoritesActions';
 import { NoteTrashActions } from './components/NoteTrashActions';
+import { NoteArchivedActions } from './components/NoteArchivedActions';
 
 export const NoteCard = ({ note, variant = 'default' }: NoteCardProps) => {
   const cardColorClass = note.color
@@ -43,7 +44,8 @@ export const NoteCard = ({ note, variant = 'default' }: NoteCardProps) => {
             isFavorite={note.isFavorite ?? false}
           />
         )}
-        {(variant === 'default' || variant === 'archived' || !variant) && (
+        {variant === 'archived' && <NoteArchivedActions noteId={note.id} />}
+        {(variant === 'default' || !variant) && (
           <NoteDefaultActions
             noteId={note.id}
             isFavorite={note.isFavorite ?? false}
