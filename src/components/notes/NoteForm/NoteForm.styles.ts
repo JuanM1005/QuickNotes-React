@@ -19,20 +19,20 @@ const styles = {
   colorButtonSelected: 'border-slate-900 scale-110 ring-2',
   noColorButton:
     'rounded-full border border-dashed border-slate-300 px-3 py-1 text-xs text-slate-500 hover:bg-slate-50 cursor-pointer transition',
-  noColorButtonSelected: 'border-slate-900 bg-slate-100 text-slate-900',
+  noColorButtonSelected: 'border-brand-600 bg-brand-50 text-brand-700',
   categoryList: 'flex flex-wrap items-center gap-2',
   categoryBtn: (active: boolean) =>
     clsx(
       'rounded-full px-3 py-1 text-xs font-medium transition-colors cursor-pointer',
       active
-        ? 'bg-slate-900 text-white'
+        ? 'bg-brand-600 text-white'
         : 'border border-slate-200 bg-white text-slate-600 hover:bg-slate-50',
     ),
   noCategoryBtn: (active: boolean) =>
     clsx(
       'rounded-full border border-dashed px-3 py-1 text-xs transition-colors cursor-pointer',
       active
-        ? 'border-slate-900 bg-slate-100 text-slate-900'
+        ? 'border-brand-600 bg-brand-50 text-brand-700'
         : 'border-slate-300 text-slate-500 hover:bg-slate-50',
     ),
   iconList: 'flex flex-wrap items-center gap-2',
@@ -40,14 +40,14 @@ const styles = {
     clsx(
       'flex size-9 items-center justify-center rounded-xl border-2 transition cursor-pointer hover:bg-slate-50',
       active
-        ? 'border-slate-900 bg-slate-100 text-slate-900'
+        ? 'border-brand-600 bg-brand-50 text-brand-700'
         : 'border-slate-200 text-slate-500',
     ),
   noIconBtn: (active: boolean) =>
     clsx(
       'rounded-full border border-dashed px-3 py-1 text-xs transition-colors cursor-pointer',
       active
-        ? 'border-slate-900 bg-slate-100 text-slate-900'
+        ? 'border-brand-600 bg-brand-50 text-brand-700'
         : 'border-slate-300 text-slate-500 hover:bg-slate-50',
     ),
   actions: 'mt-2 flex justify-end gap-3',

@@ -11,6 +11,19 @@
   --animate-overlay-show: overlay-show 0.2s ease-out;
   --animate-sheet-up: sheet-up 0.3s cubic-bezier(0.32, 0.72, 0, 1);
   --animate-dialog-in: dialog-in 0.2s ease-out;
+
+  /* Brand palette (indigo/violet) — identidad visual de QuickNotes */
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-300: #a5b4fc;
+  --color-brand-400: #818cf8;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+  --color-brand-800: #3730a3;
+  --color-brand-900: #312e81;
+  --color-brand-950: #1e1b4b;
 }
 
 @keyframes overlay-show {

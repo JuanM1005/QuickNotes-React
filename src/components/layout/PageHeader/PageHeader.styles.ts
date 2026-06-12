@@ -2,7 +2,7 @@ const styles = {
   header: 'mb-8 sm:mb-10',
 
   content:
-    'relative flex items-start justify-between gap-4 overflow-hidden rounded-3xl bg-linear-to-br from-white via-slate-50 to-blue-50/60 px-6 py-8 shadow-sm',
+    'relative flex items-start justify-between gap-4 overflow-hidden rounded-3xl bg-linear-to-br from-white via-slate-50 to-brand-50/50 px-6 py-8 shadow-sm',
 
   textContent: 'relative z-10 flex-1 min-w-0',
 
