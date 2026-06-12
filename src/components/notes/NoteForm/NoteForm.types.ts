@@ -12,6 +12,7 @@ export const AVAILABLE_COLORS: NoteColor[] = [
   'pink',
   'purple',
   'red',
+  'orange',
 ];
 
 export const AVAILABLE_CATEGORIES: { label: string; value: NoteCategory }[] = [
